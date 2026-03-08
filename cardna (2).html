@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CarDNA — From Beginner to Expert</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#060a06;--dark:#0b0f0b;--card:#101410;--card2:#161c16;--border:#1e2a1e;--border2:#243024;--green:#22c55e;--green2:#16a34a;--gg:rgba(34,197,94,0.12);--gd:rgba(34,197,94,0.06);--lime:#84cc16;--gold:#eab308;--red:#ef4444;--orange:#f97316;--blue:#3b82f6;--white:#f0f5f0;--muted:#6b7a6b;--muted2:#4a574a}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:'Inter',sans-serif;font-weight:300;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1rem 3rem;background:rgba(6,10,6,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.6rem;letter-spacing:.04em}.logo span{color:var(--green)}
+nav ul{display:flex;gap:1.4rem;list-style:none}
+nav ul a{color:var(--muted);text-decoration:none;font-size:.73rem;letter-spacing:.07em;text-transform:uppercase;font-family:'Syne',sans-serif;font-weight:700;transition:color .2s;display:flex;align-items:center;gap:.3rem}
+nav ul a:hover{color:var(--green)}.pd{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--green)}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 3rem 5rem;position:relative;overflow:hidden}
+.hg{position:absolute;top:10%;left:50%;transform:translateX(-50%);width:800px;height:400px;background:radial-gradient(ellipse,rgba(34,197,94,.06) 0%,transparent 70%);pointer-events:none}
+.hgrid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;opacity:.25;pointer-events:none}
+.eyebrow{font-family:'Syne',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--green);margin-bottom:1.5rem;display:flex;align-items:center;gap:.8rem}
+.eyebrow::before{content:'';width:2rem;height:1px;background:var(--green)}
+h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(3.2rem,9vw,8.5rem);line-height:.93;letter-spacing:-.02em;margin-bottom:2rem}
+h1 em{font-style:normal;color:var(--green);display:block}
+.hero-sub{max-width:480px;font-size:1rem;color:var(--muted);line-height:1.8;margin-bottom:3rem}
+.cta-row{display:flex;gap:1rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 2rem;border-radius:4px;font-family:'Syne',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;cursor:pointer;border:none;transition:all .25s}
+.btn-green{background:var(--green);color:#060a06}.btn-green:hover{background:#4ade80;box-shadow:0 0 40px var(--gg);transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--white);border:1px solid var(--border2)}.btn-ghost:hover{border-color:var(--green);color:var(--green);transform:translateY(-2px)}
+.btn-sm{padding:.55rem 1.2rem;font-size:.72rem}
+.rm-bar{display:flex;border:1px solid var(--border2);margin:0 3rem;border-radius:4px;overflow:hidden}
+.rm{flex:1;padding:1.1rem 1rem;border-right:1px solid var(--border2);display:flex;flex-direction:column;gap:.3rem;text-decoration:none;transition:background .25s}
+.rm:last-child{border-right:none}.rm:hover{background:var(--gd)}
+.rm-n{font-family:'Syne',sans-serif;font-weight:800;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--green)}
+.rm-t{font-family:'Syne',sans-serif;font-weight:700;font-size:.74rem;color:var(--white)}
+.rm-s{font-size:.65rem;color:var(--muted)}
+.stats-bar{display:flex;border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);margin:0 3rem}
+.stat{flex:1;padding:1.5rem 2rem;border-right:1px solid var(--border2)}.stat:last-child{border-right:none}
+.stat-num{font-family:'Syne',sans-serif;font-weight:800;font-size:2.2rem;color:var(--green);line-height:1}
+.stat-label{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;margin-top:.3rem}
+section{padding:6rem 3rem}
+.divider{height:1px;background:linear-gradient(to right,transparent,var(--border2),transparent);margin:0 3rem}
+.sec-eye{font-family:'Syne',sans-serif;font-weight:700;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.8rem;display:flex;align-items:center;gap:.6rem;color:var(--green)}
+.sec-eye::before{content:'';width:1.5rem;height:1px;background:var(--green)}
+h2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3.2rem);line-height:1;letter-spacing:-.02em;margin-bottom:.8rem}
+.sec-intro{color:var(--muted);max-width:540px;line-height:1.8;margin-bottom:3rem;font-size:.93rem}
+.subhead{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;margin-bottom:1.4rem;color:var(--green)}
+.grid-auto{display:grid;grid-template-columns:repeat(auto-fill,minmax(275px,1fr));gap:1px;background:var(--border2);border:1px solid var(--border2);border-radius:4px;overflow:hidden}
+.gc{background:var(--card);padding:2rem;position:relative;overflow:hidden;transition:background .25s}.gc:hover{background:var(--card2)}
+.gc-bar{position:absolute;top:0;left:0;width:3px;height:100%;background:var(--green);transform:scaleY(0);transform-origin:bottom;transition:transform .3s}
+.gc:hover .gc-bar{transform:scaleY(1)}
+.g-icon{font-size:2rem;margin-bottom:.9rem;display:block}
+.g-term{font-family:'Syne',sans-serif;font-weight:800;font-size:1.05rem;margin-bottom:.5rem}
+.g-def{font-size:.86rem;color:var(--muted);line-height:1.72}
+.g-ex{margin-top:.8rem;font-size:.75rem;color:var(--lime)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;margin-bottom:3rem}
+.ebox{background:var(--card);border:1px solid var(--border2);border-radius:4px;padding:2rem;position:sticky;top:6rem}
+.ebox-t{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;margin-bottom:1.5rem}
+.fstep{display:flex;align-items:center;gap:1rem;padding:.75rem 0;border-bottom:1px solid var(--border)}
+.fstep:last-child{border-bottom:none}
+.fnum{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;color:var(--border2);min-width:1.8rem;line-height:1}
+.flbl{font-size:.79rem;color:var(--muted);line-height:1.5}
+.flbl strong{color:var(--white);display:block;font-size:.86rem}
+.slist{display:flex;flex-direction:column}
+.si{display:flex;gap:1.5rem;padding:1.6rem 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.si:last-child{border-bottom:none}
+.si-n{font-family:'Syne',sans-serif;font-weight:800;font-size:1.8rem;color:var(--border2);line-height:1;min-width:2rem}
+.si-t{font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;margin-bottom:.4rem;color:var(--white)}
+.si-d{font-size:.85rem;color:var(--muted);line-height:1.72}
+.dt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:3rem}
+.dt-card{background:var(--card);border:1px solid var(--border2);border-radius:4px;padding:1.8rem;text-align:center;transition:all .3s}
+.dt-card:hover{border-color:var(--green);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.4)}
+.dt-name{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;margin:.8rem 0 .3rem}
+.dt-full{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.8rem}
+.dt-desc{font-size:.82rem;color:var(--muted);line-height:1.65}
+.dt-best{margin-top:.8rem;font-size:.7rem;color:var(--green)}
+.perf-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border2);border:1px solid var(--border2);border-radius:4px;overflow:hidden;margin-bottom:2rem}
+.pc{background:var(--card);padding:2.5rem 1.5rem;text-align:center;transition:background .25s}.pc:hover{background:var(--card2)}
+.pc-icon{font-size:2rem;margin-bottom:.7rem}
+.pc-num{font-family:'Syne',sans-serif;font-weight:800;font-size:2.4rem;line-height:1;color:var(--green)}
+.pc-unit{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin:.3rem 0}
+.pc-name{font-family:'Syne',sans-serif;font-weight:700;font-size:.82rem}
+.pc-note{font-size:.72rem;color:var(--muted);margin-top:.4rem;line-height:1.5}
+.gear-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border2);border:1px solid var(--border2);border-radius:4px;overflow:hidden;margin-bottom:3rem}
+.gear-c{background:var(--card);padding:1.5rem;text-align:center;transition:background .25s}.gear-c:hover{background:var(--card2)}
+.gear-icon{font-size:1.8rem;margin-bottom:.6rem}
+.gear-name{font-family:'Syne',sans-serif;font-weight:700;font-size:.86rem;margin-bottom:.4rem}
+.gear-pro{font-size:.72rem;color:var(--green);line-height:1.5}
+.gear-con{font-size:.72rem;color:var(--red);line-height:1.5;margin-top:.3rem}
+.brands-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1.5rem}
+.bcard{background:var(--card);border:1px solid var(--border2);border-radius:4px;padding:1.8rem;transition:all .3s;position:relative;overflow:hidden}
+.bcard::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--green);transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.bcard:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.4)}.bcard:hover::after{transform:scaleX(1)}
+.bname{font-family:'Syne',sans-serif;font-weight:800;font-size:1.7rem;letter-spacing:.01em;margin-bottom:.3rem}
+.borigin{font-size:.68rem;text-transform:uppercase;letter-spacing:.15em;margin-bottom:.8rem;color:var(--green)}
+.bdesc{font-size:.82rem;color:var(--muted);line-height:1.65}
+.btier{margin-top:1rem;font-size:.68rem;color:var(--lime);text-transform:uppercase;letter-spacing:.1em}
+.prac-stack{display:flex;flex-direction:column;gap:1px;background:var(--border2);border:1px solid var(--border2);border-radius:4px;overflow:hidden}
+.prac-row{background:var(--card);padding:2rem 2.5rem;display:flex;gap:2rem;align-items:flex-start;transition:background .25s}
+.prac-row:hover{background:var(--card2)}
+.p-icon{font-size:1.8rem;min-width:2.5rem;padding-top:.1rem}
+.p-q{font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;margin-bottom:.45rem}
+.p-a{font-size:.85rem;color:var(--muted);line-height:1.72}
+.p-tip{margin-top:.5rem;font-size:.74rem;color:var(--lime)}
+.adv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.5rem}
+.adv-card{background:var(--card);border:1px solid var(--border2);border-top:2px solid var(--green);border-radius:4px;padding:2rem;transition:all .3s}
+.adv-card:hover{background:var(--card2);transform:translateY(-3px)}
+.adv-icon{font-size:2rem;margin-bottom:1rem}
+.adv-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.05rem;margin-bottom:.4rem}
+.adv-sub{font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--green);margin-bottom:.8rem}
+.adv-desc{font-size:.84rem;color:var(--muted);line-height:1.65}
+/* QUIZ */
+.qblock{margin-top:3rem;border:1px solid var(--border2);border-radius:6px;overflow:hidden}
+.qhdr{background:var(--gd);border-bottom:1px solid var(--border2);padding:1.2rem 2rem;display:flex;align-items:center;gap:1rem}
+.qhdr-title{font-family:'Syne',sans-serif;font-weight:800;font-size:.93rem;color:var(--green)}
+.qhdr-sub{font-size:.74rem;color:var(--muted)}
+.qqs{padding:2rem;display:flex;flex-direction:column;gap:1.8rem;background:var(--card)}
+.qq-text{font-family:'Syne',sans-serif;font-weight:700;font-size:.88rem;margin-bottom:1rem;color:var(--white)}
+.q-opts{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.qopt{background:var(--dark);border:1px solid var(--border2);border-radius:4px;padding:.75rem 1rem;font-size:.81rem;color:var(--muted);cursor:pointer;transition:all .2s;text-align:left;font-family:'Inter',sans-serif}
+.qopt:hover{border-color:var(--green);color:var(--white);background:var(--gd)}
+.qopt.correct{border-color:var(--green);background:rgba(34,197,94,.15);color:var(--green);pointer-events:none}
+.qopt.wrong{border-color:var(--red);background:rgba(239,68,68,.1);color:#f87171;pointer-events:none}
+.qopt.disabled{pointer-events:none;opacity:.5}
+.qfb{margin-top:.8rem;font-size:.79rem;padding:.6rem 1rem;border-radius:3px;display:none}
+.qfb.show{display:block}
+.qfb.good{background:rgba(34,197,94,.1);color:var(--green);border:1px solid rgba(34,197,94,.2)}
+.qfb.bad{background:rgba(239,68,68,.08);color:#f87171;border:1px solid rgba(239,68,68,.2)}
+.qfooter{background:var(--dark);border-top:1px solid var(--border2);padding:1.2rem 2rem;display:flex;align-items:center;justify-content:space-between}
+.qscore{font-family:'Syne',sans-serif;font-weight:700;font-size:.82rem;color:var(--muted)}
+.qscore span{color:var(--green)}
+/* COMPARE */
+.ctool{border:1px solid var(--border2);border-radius:6px;overflow:hidden;margin-top:0}
+.cthdr{background:var(--gd);border-bottom:1px solid var(--border2);padding:1.2rem 2rem;display:flex;align-items:center;gap:1rem}
+.cthdr-title{font-family:'Syne',sans-serif;font-weight:800;font-size:.93rem;color:var(--green)}
+.ct-sels{display:grid;grid-template-columns:1fr auto 1fr;gap:1.5rem;align-items:center;padding:1.5rem 2rem;background:var(--card);border-bottom:1px solid var(--border2)}
+.ct-sel-wrap{display:flex;flex-direction:column;gap:.5rem}
+.ct-label{font-family:'Syne',sans-serif;font-weight:700;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.ct-sel{background:var(--dark);border:1px solid var(--border2);border-radius:4px;padding:.75rem 1rem;color:var(--white);font-family:'Inter',sans-serif;font-size:.84rem;outline:none;cursor:pointer;transition:border-color .2s;width:100%}
+.ct-sel:focus{border-color:var(--green)}
+.ct-vs{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;color:var(--border2);text-align:center}
+.ct-results{padding:2rem;background:var(--card)}
+.ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.ct-card{background:var(--dark);border:1px solid var(--border2);border-radius:4px;padding:1.5rem}
+.ct-name{font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;margin-bottom:.2rem}
+.ct-sub{font-size:.7rem;color:var(--green);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1.2rem}
+.ct-row{display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--border)}
+.ct-row:last-child{border-bottom:none}
+.ct-key{font-size:.76rem;color:var(--muted)}
+.ct-val{font-family:'Syne',sans-serif;font-weight:700;font-size:.8rem;color:var(--white)}
+.ct-val.better{color:var(--green)}
+.ct-verdict{margin-top:1.5rem;padding:1.2rem;background:var(--gd);border:1px solid rgba(34,197,94,.15);border-radius:4px;font-size:.82rem;color:var(--white);line-height:1.75}
+.ct-verdict strong{color:var(--green);font-family:'Syne',sans-serif}
+.ct-empty{text-align:center;padding:3rem;color:var(--muted);font-size:.88rem}
+.mindset-box{padding:3rem;background:var(--card);border:1px solid var(--border2);border-top:2px solid var(--green);border-radius:4px;text-align:center;margin-top:3rem}
+footer{border-top:1px solid var(--border2);padding:3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem}.footer-logo span{color:var(--green)}
+.fnote{font-size:.76rem;color:var(--muted2)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.hero .eyebrow{animation:fadeUp .6s ease both}
+.hero h1{animation:fadeUp .6s .1s ease both}
+.hero .hero-sub{animation:fadeUp .6s .2s ease both}
+.hero .cta-row{animation:fadeUp .6s .3s ease both}
+@media(max-width:900px){nav ul{display:none}.two-col,.dt-grid{grid-template-columns:1fr}.perf-row,.gear-row{grid-template-columns:repeat(2,1fr)}.rm-bar,.stats-bar{flex-direction:column;margin:0 1.5rem}.rm,.stat{border-right:none;border-bottom:1px solid var(--border2)}section{padding:4rem 1.5rem}nav{padding:1rem 1.5rem}.divider{margin:0 1.5rem}footer{flex-direction:column;padding:2rem 1.5rem}.q-opts{grid-template-columns:1fr}.ct-sels{grid-template-columns:1fr}.ct-grid{grid-template-columns:1fr}.ct-vs{display:none}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Car<span>DNA</span> <span style="font-size:.65rem;font-weight:600;color:var(--muted);letter-spacing:.04em;font-family:'Inter',sans-serif;">— From Beginner to Expert</span></div>
+  <div style="display:flex;align-items:center;gap:.5rem;background:var(--dark);border:1px solid var(--border2);border-radius:20px;padding:.35rem .9rem;font-size:.75rem;font-family:'Inter',sans-serif;">
+    <svg width="10" height="12" viewBox="0 0 10 12" fill="none"><rect x="1" y="5" width="8" height="6" rx="1.5" stroke="#22c55e" stroke-width="1.2"/><path d="M3 5V3.5a2 2 0 0 1 4 0V5" stroke="#22c55e" stroke-width="1.2" stroke-linecap="round"/></svg>
+    <span style="color:var(--green);font-weight:500;">https://</span><span style="color:var(--white);">cardna.com</span>
+  </div>
+  <ul>
+    <li><a href="#p1"><span class="pd"></span>Foundation</a></li>
+    <li><a href="#p2"><span class="pd"></span>Mechanics</a></li>
+    <li><a href="#p3"><span class="pd"></span>Performance</a></li>
+    <li><a href="#p4"><span class="pd"></span>Brands</a></li>
+    <li><a href="#p5"><span class="pd"></span>Practical</a></li>
+    <li><a href="#p6"><span class="pd"></span>Advanced</a></li>
+    <li><a href="#compare"><span class="pd"></span>Compare</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hgrid"></div><div class="hg"></div>
+  <div class="eyebrow">From Beginner → To Expert</div>
+  <h1>The Car<em>Nerd</em>Roadmap.</h1>
+  <p class="hero-sub">Six phases. No jargon. Real knowledge. Go from "I just drive it" to understanding every car on the road — with quizzes to test yourself along the way.</p>
+  <div class="cta-row">
+    <a href="#p1" class="btn btn-green">Start Phase 1 →</a>
+    <a href="#compare" class="btn btn-ghost">⚖️ Compare Cars</a>
+  </div>
+</section>
+
+<div class="rm-bar">
+  <a href="#p1" class="rm"><span class="rm-n">Phase 01</span><span class="rm-t">Foundation</span><span class="rm-s">Car Language</span></a>
+  <a href="#p2" class="rm"><span class="rm-n">Phase 02</span><span class="rm-t">Core Mechanics</span><span class="rm-s">How Cars Work</span></a>
+  <a href="#p3" class="rm"><span class="rm-n">Phase 03</span><span class="rm-t">Performance</span><span class="rm-s">Heart of Machine</span></a>
+  <a href="#p4" class="rm"><span class="rm-n">Phase 04</span><span class="rm-t">Brands & Market</span><span class="rm-s">Know the Industry</span></a>
+  <a href="#p5" class="rm"><span class="rm-n">Phase 05</span><span class="rm-t">Practical App</span><span class="rm-s">Think Like a Nerd</span></a>
+  <a href="#p6" class="rm"><span class="rm-n">Phase 06</span><span class="rm-t">Advanced</span><span class="rm-s">Nerd Stuff</span></a>
+</div>
+<div class="stats-bar">
+  <div class="stat"><div class="stat-num">6</div><div class="stat-label">Learning Phases</div></div>
+  <div class="stat"><div class="stat-num">40+</div><div class="stat-label">Concepts Explained</div></div>
+  <div class="stat"><div class="stat-num">48</div><div class="stat-label">Quiz Questions</div></div>
+  <div class="stat"><div class="stat-num">0</div><div class="stat-label">Prior Knowledge Needed</div></div>
+</div>
+<div class="divider"></div>
+
+<!-- PHASE 1 -->
+<section id="p1">
+  <div class="sec-eye">Phase 01 — Foundation</div>
+  <h2>Car Language<br>& Engine Basics</h2>
+  <p class="sec-intro">Before anything else — learn the words. Every term you'll hear broken down into plain English with real comparisons.</p>
+  <div class="subhead">⚡ Torque vs Horsepower</div>
+  <div class="two-col">
+    <div class="slist">
+      <div class="si"><div class="si-n">01</div><div><div class="si-t">What Is an Engine?</div><div class="si-d">Turns fuel into motion through controlled explosions inside cylinders. Layouts: Inline (row), V-shape (two angled rows like a Mustang), Boxer (flat cylinders like a Subaru).</div></div></div>
+      <div class="si"><div class="si-n">02</div><div><div class="si-t">Horsepower (HP) — Top-End Power</div><div class="si-d">The car's ceiling — determines ultimate top speed. A Civic has ~158 HP. A Ferrari 296 has 654 HP. More HP = faster at sustained high speeds.</div></div></div>
+      <div class="si"><div class="si-n">03</div><div><div class="si-t">Torque — The Shove You Feel</div><div class="si-d">The twisting force that pushes you back in your seat from a stop. EVs and diesel trucks have massive torque from zero RPM — that's why they feel so instant off the line. HP is the sprint, torque is the launch.</div></div></div>
+      <div class="si"><div class="si-n">04</div><div><div class="si-t">Engine Size (CC / Litres)</div><div class="si-d">Total cylinder volume. A 2.0L breathes more air+fuel than a 1.0L. Turbos bypass this: a 1.6T can beat a 2.5 naturally aspirated. Smaller + turbo is the modern formula.</div></div></div>
+    </div>
+    <div class="ebox">
+      <div class="ebox-t">📊 Torque vs HP Curve</div>
+      <svg viewBox="0 0 280 155" style="width:100%;height:150px;margin-bottom:1rem;">
+        <line x1="35" y1="10" x2="35" y2="128" stroke="#1e2a1e" stroke-width="1"/>
+        <line x1="35" y1="128" x2="270" y2="128" stroke="#1e2a1e" stroke-width="1"/>
+        <line x1="35" y1="78" x2="270" y2="78" stroke="#161c16" stroke-width="1" stroke-dasharray="4,4"/>
+        <text x="30" y="131" fill="#4a574a" font-size="7" text-anchor="end">0</text>
+        <text x="30" y="81" fill="#4a574a" font-size="7" text-anchor="end">250</text>
+        <text x="30" y="14" fill="#4a574a" font-size="7" text-anchor="end">500</text>
+        <text x="80" y="141" fill="#4a574a" font-size="7" text-anchor="middle">2k</text>
+        <text x="155" y="141" fill="#4a574a" font-size="7" text-anchor="middle">4k RPM</text>
+        <text x="230" y="141" fill="#4a574a" font-size="7" text-anchor="middle">6k</text>
+        <path d="M35,118 C60,63 90,33 130,30 C170,27 215,38 270,58" fill="none" stroke="#f97316" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M35,126 C75,123 115,108 160,68 C200,33 240,16 270,13" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round"/>
+        <text x="138" y="22" fill="#f97316" font-size="9" font-weight="bold">TORQUE</text>
+        <text x="210" y="10" fill="#22c55e" font-size="9" font-weight="bold">HP</text>
+      </svg>
+      <div style="font-size:.79rem;color:var(--muted);line-height:1.8;">
+        <p>🟠 <strong style="color:var(--orange)">Torque</strong> peaks early — the shove off the line.</p>
+        <p style="margin-top:.3rem;">🟢 <strong style="color:var(--green)">Horsepower</strong> builds at high RPM — sustained rush.</p>
+        <p style="margin-top:.8rem;padding-top:.8rem;border-top:1px solid var(--border);color:var(--muted2);font-size:.72rem;">EVs = max torque from 0 RPM. No revving needed. Pure instant shove.</p>
+      </div>
+    </div>
+  </div>
+  <div class="subhead">🛞 Drivetrain — FWD, RWD, AWD</div>
+  <div class="dt-grid">
+    <div class="dt-card">
+      <svg viewBox="0 0 160 65" style="width:100%;height:60px;">
+        <rect x="25" y="22" width="110" height="26" rx="4" fill="#161c16" stroke="#1e2a1e"/>
+        <circle cx="48" cy="55" r="8" fill="none" stroke="#22c55e" stroke-width="2.5"/>
+        <circle cx="112" cy="55" r="8" fill="none" stroke="#2a382a" stroke-width="1.5"/>
+        <circle cx="48" cy="10" r="8" fill="none" stroke="#22c55e" stroke-width="2.5"/>
+        <circle cx="112" cy="10" r="8" fill="none" stroke="#2a382a" stroke-width="1.5"/>
+        <line x1="48" y1="22" x2="48" y2="47" stroke="#22c55e" stroke-width="2" stroke-dasharray="3,2"/>
+        <line x1="48" y1="18" x2="48" y2="10" stroke="#22c55e" stroke-width="2" stroke-dasharray="3,2"/>
+        <text x="80" y="40" fill="#22c55e" font-size="7.5" font-weight="bold" text-anchor="middle">POWER →</text>
+      </svg>
+      <div class="dt-name">FWD</div><div class="dt-full">Front-Wheel Drive</div>
+      <div class="dt-desc">Power to front wheels only. Most efficient, cheapest, great in rain. Standard for everyday cars.</div>
+      <div class="dt-best">Best for: Daily driving, fuel economy</div>
+    </div>
+    <div class="dt-card">
+      <svg viewBox="0 0 160 65" style="width:100%;height:60px;">
+        <rect x="25" y="22" width="110" height="26" rx="4" fill="#161c16" stroke="#1e2a1e"/>
+        <circle cx="48" cy="55" r="8" fill="none" stroke="#ef4444" stroke-width="2.5"/>
+        <circle cx="112" cy="55" r="8" fill="none" stroke="#ef4444" stroke-width="2.5"/>
+        <circle cx="48" cy="10" r="8" fill="none" stroke="#2a382a" stroke-width="1.5"/>
+        <circle cx="112" cy="10" r="8" fill="none" stroke="#2a382a" stroke-width="1.5"/>
+        <line x1="112" y1="22" x2="112" y2="47" stroke="#ef4444" stroke-width="2" stroke-dasharray="3,2"/>
+        <line x1="112" y1="18" x2="112" y2="10" stroke="#ef4444" stroke-width="2" stroke-dasharray="3,2"/>
+        <text x="80" y="40" fill="#ef4444" font-size="7.5" font-weight="bold" text-anchor="middle">← POWER</text>
+      </svg>
+      <div class="dt-name">RWD</div><div class="dt-full">Rear-Wheel Drive</div>
+      <div class="dt-desc">Power to rear wheels. Better balance, sportier feel. Thrilling on track, tricky in snow.</div>
+      <div class="dt-best">Best for: Sports cars, performance driving</div>
+    </div>
+    <div class="dt-card">
+      <svg viewBox="0 0 160 65" style="width:100%;height:60px;">
+        <rect x="25" y="22" width="110" height="26" rx="4" fill="#161c16" stroke="#1e2a1e"/>
+        <circle cx="48" cy="55" r="8" fill="none" stroke="#22c55e" stroke-width="2.5"/>
+        <circle cx="112" cy="55" r="8" fill="none" stroke="#22c55e" stroke-width="2.5"/>
+        <circle cx="48" cy="10" r="8" fill="none" stroke="#22c55e" stroke-width="2.5"/>
+        <circle cx="112" cy="10" r="8" fill="none" stroke="#22c55e" stroke-width="2.5"/>
+        <line x1="80" y1="22" x2="48" y2="35" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="2,2"/>
+        <line x1="80" y1="22" x2="112" y2="35" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="2,2"/>
+        <text x="80" y="40" fill="#22c55e" font-size="7.5" font-weight="bold" text-anchor="middle">ALL 4</text>
+      </svg>
+      <div class="dt-name">AWD / 4WD</div><div class="dt-full">All / Four-Wheel Drive</div>
+      <div class="dt-desc">Power to all four wheels. Max grip in any condition. AWD = auto, 4WD = manual/off-road.</div>
+      <div class="dt-best">Best for: Snow, rain, off-road, SUVs</div>
+    </div>
+  </div>
+  <div class="grid-auto" style="margin-bottom:0">
+    <div class="gc"><div class="gc-bar"></div><span class="g-icon">⛽</span><div class="g-term">MPG / Fuel Economy</div><div class="g-def">Miles Per Gallon — how far on one gallon. Higher = better. Prius ~54 MPG. Pickup truck ~18 MPG.</div><div class="g-ex">💡 Every 10 MPG improvement saves ~$500/year in fuel costs.</div></div>
+    <div class="gc"><div class="gc-bar"></div><span class="g-icon">🔋</span><div class="g-term">EV / Hybrid / ICE</div><div class="g-def">EV = electric only. Hybrid = gas + battery. ICE = traditional gas engine. Different costs, ranges, lifestyles.</div><div class="g-ex">💡 Hybrid = the sensible middle ground for most people right now.</div></div>
+    <div class="gc"><div class="gc-bar"></div><span class="g-icon">📐</span><div class="g-term">Wheelbase</div><div class="g-def">Distance between front and rear axles. Longer = more room + smoother ride. Shorter = nimbler in corners.</div><div class="g-ex">💡 Long = limo comfort. Short = sports car sharpness.</div></div>
+    <div class="gc"><div class="gc-bar"></div><span class="g-icon">🛡️</span><div class="g-term">Safety Ratings</div><div class="g-def">NHTSA gives 1–5 stars. IIHS gives Good/Marginal/Poor. Real crash tests. Always check before buying.</div><div class="g-ex">💡 Look for IIHS "Top Safety Pick+" — the highest available rating.</div></div>
+  </div>
+  <div class="qblock" id="quiz1">
+    <div class="qhdr"><div style="font-size:1.4rem;">🧠</div><div><div class="qhdr-title">Phase 1 Quiz — Foundation</div><div class="qhdr-sub">8 questions · Test what you just learned</div></div></div>
+    <div class="qqs">
+      <div class="qq"><div class="qq-text">1. What does "torque" primarily affect in a car?</div><div class="q-opts"><button class="qopt" onclick="ans(this,0,false,'quiz1')">Top speed on a highway</button><button class="qopt" onclick="ans(this,0,true,'quiz1')">Acceleration from a stop</button><button class="qopt" onclick="ans(this,0,false,'quiz1')">Fuel economy in the city</button><button class="qopt" onclick="ans(this,0,false,'quiz1')">Braking distance</button></div><div class="qfb" id="fb-0"></div></div>
+      <div class="qq"><div class="qq-text">2. Which drivetrain sends power to ALL four wheels automatically?</div><div class="q-opts"><button class="qopt" onclick="ans(this,1,false,'quiz1')">FWD</button><button class="qopt" onclick="ans(this,1,false,'quiz1')">RWD</button><button class="qopt" onclick="ans(this,1,true,'quiz1')">AWD</button><button class="qopt" onclick="ans(this,1,false,'quiz1')">2WD</button></div><div class="qfb" id="fb-1"></div></div>
+      <div class="qq"><div class="qq-text">3. A "2.0L" engine — what does the L refer to?</div><div class="q-opts"><button class="qopt" onclick="ans(this,2,false,'quiz1')">Length of the engine block</button><button class="qopt" onclick="ans(this,2,true,'quiz1')">Total volume of cylinders in litres</button><button class="qopt" onclick="ans(this,2,false,'quiz1')">Litres of oil it uses</button><button class="qopt" onclick="ans(this,2,false,'quiz1')">Litres of fuel per 100km</button></div><div class="qfb" id="fb-2"></div></div>
+      <div class="qq"><div class="qq-text">4. What does "horsepower" mainly determine in a car?</div><div class="q-opts"><button class="qopt" onclick="ans(this,100,false,'quiz1')">How heavy the car is</button><button class="qopt" onclick="ans(this,100,true,'quiz1')">Top-end speed and sustained power</button><button class="qopt" onclick="ans(this,100,false,'quiz1')">How much fuel it uses</button><button class="qopt" onclick="ans(this,100,false,'quiz1')">How wide the tires are</button></div><div class="qfb" id="fb-100"></div></div>
+      <div class="qq"><div class="qq-text">5. Which engine layout does Subaru famously use for a lower center of gravity?</div><div class="q-opts"><button class="qopt" onclick="ans(this,101,false,'quiz1')">Inline (straight)</button><button class="qopt" onclick="ans(this,101,false,'quiz1')">V-shape</button><button class="qopt" onclick="ans(this,101,true,'quiz1')">Boxer (flat/horizontally opposed)</button><button class="qopt" onclick="ans(this,101,false,'quiz1')">Rotary</button></div><div class="qfb" id="fb-101"></div></div>
+      <div class="qq"><div class="qq-text">6. What does a "hybrid" car combine?</div><div class="q-opts"><button class="qopt" onclick="ans(this,102,false,'quiz1')">Two petrol engines</button><button class="qopt" onclick="ans(this,102,true,'quiz1')">A combustion engine and an electric battery/motor</button><button class="qopt" onclick="ans(this,102,false,'quiz1')">Diesel and petrol in one tank</button><button class="qopt" onclick="ans(this,102,false,'quiz1')">Hydrogen and electric power</button></div><div class="qfb" id="fb-102"></div></div>
+      <div class="qq"><div class="qq-text">7. RWD (Rear-Wheel Drive) sends power to which wheels?</div><div class="q-opts"><button class="qopt" onclick="ans(this,103,false,'quiz1')">All four wheels</button><button class="qopt" onclick="ans(this,103,false,'quiz1')">The front two wheels</button><button class="qopt" onclick="ans(this,103,true,'quiz1')">The rear two wheels</button><button class="qopt" onclick="ans(this,103,false,'quiz1')">Alternates between front and rear</button></div><div class="qfb" id="fb-103"></div></div>
+      <div class="qq"><div class="qq-text">8. A longer wheelbase (distance between axles) generally means...</div><div class="q-opts"><button class="qopt" onclick="ans(this,104,false,'quiz1')">The car handles more sharply in corners</button><button class="qopt" onclick="ans(this,104,false,'quiz1')">The car is lighter and faster</button><button class="qopt" onclick="ans(this,104,true,'quiz1')">More interior space and a smoother ride</button><button class="qopt" onclick="ans(this,104,false,'quiz1')">Better fuel economy always</button></div><div class="qfb" id="fb-104"></div></div>
+    </div>
+    <div class="qfooter"><div class="qscore">Score: <span id="score-quiz1">0</span> / 8</div><button class="btn btn-ghost btn-sm" onclick="resetQ('quiz1')">↺ Reset</button></div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- PHASE 2 -->
+<section id="p2">
+  <div class="sec-eye">Phase 02 — Core Mechanics</div>
+  <h2>How Cars<br>Actually Work</h2>
+  <p class="sec-intro">You don't need to be a mechanic. Understanding what's under the hood makes you a smarter driver and buyer.</p>
+  <div class="two-col">
+    <div class="slist">
+      <div class="si"><div class="si-n">01</div><div><div class="si-t">Suspension — Comfort vs Handling</div><div class="si-d">Springs and shock absorbers between wheels and body. Soft = smooth ride, more body lean in corners. Stiff = bumpy but sharp handling. Sports cars go stiff. Luxury cars go soft. Most everyday cars find middle ground.</div></div></div>
+      <div class="si"><div class="si-n">02</div><div><div class="si-t">Brakes — Grip & Stopping Power</div><div class="si-d">Disc brakes clamp a spinning disc to slow the wheel. Bigger discs = stronger stops. ABS stops wheels locking under panic braking, keeping you in control. Feel the pedal pulse? That's ABS working. Keep pressing hard.</div></div></div>
+      <div class="si"><div class="si-n">03</div><div><div class="si-t">Tires — Only Contact With the Road</div><div class="si-d">Everything happens through four palm-sized rubber patches. Wider = more grip, more fuel use. Summer tires go rock-hard in cold. Winter tires stay soft and grippy in freezing temps. All-season = compromise.</div></div></div>
+      <div class="si"><div class="si-n">04</div><div><div class="si-t">Cooling System</div><div class="si-d">Coolant circulates through the engine, absorbs heat, releases it through the radiator. If it fails: catastrophic overheating, catastrophic repair bill. Always keep coolant topped up.</div></div></div>
+    </div>
+    <div class="ebox">
+      <div class="ebox-t">⚙️ The 4-Stroke Engine Cycle</div>
+      <div class="fstep"><div class="fnum">1</div><div class="flbl"><strong>INTAKE</strong>Air + fuel pulled into the cylinder</div></div>
+      <div class="fstep"><div class="fnum">2</div><div class="flbl"><strong>COMPRESSION</strong>Piston squeezes mixture tight</div></div>
+      <div class="fstep"><div class="fnum">3</div><div class="flbl"><strong>COMBUSTION 💥</strong>Spark plug fires — controlled explosion</div></div>
+      <div class="fstep"><div class="fnum">4</div><div class="flbl"><strong>EXHAUST</strong>Burnt gases exit through exhaust pipe</div></div>
+      <div class="fstep"><div class="fnum">5</div><div class="flbl"><strong>WHEELS TURN</strong>Piston → crankshaft → driveshaft → wheels</div></div>
+      <div style="margin-top:1.2rem;padding:.9rem;background:var(--gd);border-radius:3px;border:1px solid rgba(34,197,94,.15);">
+        <div style="font-size:.7rem;color:var(--green);font-family:'Syne',sans-serif;font-weight:700;margin-bottom:.3rem;">THIS HAPPENS 50–150× PER SECOND</div>
+        <div style="font-size:.76rem;color:var(--muted);">At 3,000 RPM, each cylinder fires 1,500× per minute. Multiply by 4 cylinders — 6,000 tiny explosions per minute while you drive to the store.</div>
+      </div>
+    </div>
+  </div>
+  <div class="subhead">⚙️ Gearboxes — Manual, Auto, DCT, CVT</div>
+  <div class="gear-row">
+    <div class="gear-c"><div class="gear-icon">🕹️</div><div class="gear-name">Manual</div><div class="gear-pro">✅ Most engaging. Full control. Cheapest.</div><div class="gear-con">❌ Learning curve. Tiring in traffic.</div></div>
+    <div class="gear-c"><div class="gear-icon">🔄</div><div class="gear-name">Automatic</div><div class="gear-pro">✅ Easiest daily. Reliable. Great everywhere.</div><div class="gear-con">❌ Less driver involvement.</div></div>
+    <div class="gear-c"><div class="gear-icon">⚡</div><div class="gear-name">DCT (Dual-Clutch)</div><div class="gear-pro">✅ Lightning shifts. Very efficient. Fast.</div><div class="gear-con">❌ Jerky in slow traffic. Complex repairs.</div></div>
+    <div class="gear-c"><div class="gear-icon">〰️</div><div class="gear-name">CVT</div><div class="gear-pro">✅ Smoothest. Best fuel economy.</div><div class="gear-con">❌ "Rubbery" feel. Boring to push hard.</div></div>
+  </div>
+  <div class="qblock" id="quiz2">
+    <div class="qhdr"><div style="font-size:1.4rem;">🧠</div><div><div class="qhdr-title">Phase 2 Quiz — Core Mechanics</div><div class="qhdr-sub">8 questions · Test what you just learned</div></div></div>
+    <div class="qqs">
+      <div class="qq"><div class="qq-text">1. What does ABS (Anti-lock Braking System) do?</div><div class="q-opts"><button class="qopt" onclick="ans(this,3,false,'quiz2')">Makes brakes more powerful always</button><button class="qopt" onclick="ans(this,3,true,'quiz2')">Prevents wheels locking so you can still steer</button><button class="qopt" onclick="ans(this,3,false,'quiz2')">Controls the suspension stiffness</button><button class="qopt" onclick="ans(this,3,false,'quiz2')">Reduces brake noise</button></div><div class="qfb" id="fb-3"></div></div>
+      <div class="qq"><div class="qq-text">2. Which gearbox is smoothest and most fuel-efficient for daily city driving?</div><div class="q-opts"><button class="qopt" onclick="ans(this,4,false,'quiz2')">Manual</button><button class="qopt" onclick="ans(this,4,false,'quiz2')">DCT (Dual-Clutch)</button><button class="qopt" onclick="ans(this,4,true,'quiz2')">CVT</button><button class="qopt" onclick="ans(this,4,false,'quiz2')">Sequential</button></div><div class="qfb" id="fb-4"></div></div>
+      <div class="qq"><div class="qq-text">3. Stiffer suspension means...</div><div class="q-opts"><button class="qopt" onclick="ans(this,5,false,'quiz2')">More comfort, less grip</button><button class="qopt" onclick="ans(this,5,true,'quiz2')">Bumpier ride but sharper handling</button><button class="qopt" onclick="ans(this,5,false,'quiz2')">Better fuel economy only</button><button class="qopt" onclick="ans(this,5,false,'quiz2')">Slower braking response</button></div><div class="qfb" id="fb-5"></div></div>
+      <div class="qq"><div class="qq-text">4. How many strokes does a standard car engine cycle have?</div><div class="q-opts"><button class="qopt" onclick="ans(this,200,false,'quiz2')">2</button><button class="qopt" onclick="ans(this,200,false,'quiz2')">3</button><button class="qopt" onclick="ans(this,200,true,'quiz2')">4</button><button class="qopt" onclick="ans(this,200,false,'quiz2')">6</button></div><div class="qfb" id="fb-200"></div></div>
+      <div class="qq"><div class="qq-text">5. What is the main job of the cooling system?</div><div class="q-opts"><button class="qopt" onclick="ans(this,201,false,'quiz2')">Keep passengers comfortable</button><button class="qopt" onclick="ans(this,201,true,'quiz2')">Prevent the engine from overheating</button><button class="qopt" onclick="ans(this,201,false,'quiz2')">Improve fuel economy</button><button class="qopt" onclick="ans(this,201,false,'quiz2')">Reduce engine noise</button></div><div class="qfb" id="fb-201"></div></div>
+      <div class="qq"><div class="qq-text">6. Why are wider tires not always better?</div><div class="q-opts"><button class="qopt" onclick="ans(this,202,false,'quiz2')">They make the car look worse</button><button class="qopt" onclick="ans(this,202,false,'quiz2')">They reduce cornering grip</button><button class="qopt" onclick="ans(this,202,true,'quiz2')">They increase fuel consumption and road noise</button><button class="qopt" onclick="ans(this,202,false,'quiz2')">They wear out brakes faster</button></div><div class="qfb" id="fb-202"></div></div>
+      <div class="qq"><div class="qq-text">7. A DCT (Dual-Clutch Transmission) is known for...</div><div class="q-opts"><button class="qopt" onclick="ans(this,203,false,'quiz2')">Being the smoothest in slow traffic</button><button class="qopt" onclick="ans(this,203,true,'quiz2')">Lightning-fast gear changes and high efficiency</button><button class="qopt" onclick="ans(this,203,false,'quiz2')">Having the most gears of any transmission type</button><button class="qopt" onclick="ans(this,203,false,'quiz2')">Being cheapest to manufacture</button></div><div class="qfb" id="fb-203"></div></div>
+      <div class="qq"><div class="qq-text">8. What is the third stroke in a 4-stroke engine cycle?</div><div class="q-opts"><button class="qopt" onclick="ans(this,204,false,'quiz2')">Intake</button><button class="qopt" onclick="ans(this,204,false,'quiz2')">Compression</button><button class="qopt" onclick="ans(this,204,true,'quiz2')">Combustion (Power)</button><button class="qopt" onclick="ans(this,204,false,'quiz2')">Exhaust</button></div><div class="qfb" id="fb-204"></div></div>
+    </div>
+    <div class="qfooter"><div class="qscore">Score: <span id="score-quiz2">0</span> / 8</div><button class="btn btn-ghost btn-sm" onclick="resetQ('quiz2')">↺ Reset</button></div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- PHASE 3 -->
+<section id="p3">
+  <div class="sec-eye">Phase 03 — Performance Deep Dive</div>
+  <h2>Heart of<br>the Machine</h2>
+  <p class="sec-intro">Engine architecture, power delivery, and traction tech — the stuff that separates ordinary cars from machines that make your pulse quicken.</p>
+  <div class="perf-row">
+    <div class="pc"><div class="pc-icon">⚡</div><div class="pc-num">700+</div><div class="pc-unit">Horsepower</div><div class="pc-name">Supercar Territory</div><div class="pc-note">Ferrari Roma = 620 HP. Family SUV = ~250 HP. The gulf is enormous.</div></div>
+    <div class="pc"><div class="pc-icon">🏎️</div><div class="pc-num">2.9s</div><div class="pc-unit">0–60 mph</div><div class="pc-name">Hypercar Launch</div><div class="pc-note">A family car takes ~8s. Under 3s feels like a fairground ride. Your organs notice.</div></div>
+    <div class="pc"><div class="pc-icon">🌀</div><div class="pc-num">1.1g</div><div class="pc-unit">Lateral G-Force</div><div class="pc-name">Cornering Grip</div><div class="pc-note">Sports cars hit 1.0–1.1g in corners. Body weight effectively doubles sideways.</div></div>
+  </div>
+  <div class="grid-auto" style="margin-bottom:0">
+    <div class="gc"><div class="gc-bar"></div><span class="g-icon">🌪️</span><div class="g-term">Turbocharger</div><div class="g-def">Uses exhaust gases to spin a turbine forcing extra air into the engine. More air + fuel = more power without making the engine bigger.</div><div class="g-ex">💡 A 2.0L turbo can match a 3.5L naturally aspirated in peak power output.</div></div>
+    <div class="gc"><div class="gc-bar"></div><span class="g-icon">🔬</span><div class="g-term">DOHC — Dual Overhead Cam</div><div class="g-def">Two camshafts per cylinder bank = more precise valve control. Engine breathes better at high RPM, making more peak power. Found in almost all performance engines.</div><div class="g-ex">💡 DOHC = engine can rev higher and breathe freer = more power at high revs.</div></div>
+    <div class="gc"><div class="gc-bar"></div><span class="g-icon">🏁</span><div class="g-term">Launch Control</div><div class="g-def">Computer manages power for the fastest possible standing start. Hold brake, floor throttle — ECU builds perfect RPM, manages traction — release brake. Repeatable, terrifying speed.</div><div class="g-ex">💡 Why the Tesla Model S Plaid hits 60 mph in 1.9s consistently, every time.</div></div>
+    <div class="gc"><div class="gc-bar"></div><span class="g-icon">🛡️</span><div class="g-term">ABS + Traction Control</div><div class="g-def">ABS prevents wheel lock under hard braking so you keep steering. Traction Control detects wheel spin on acceleration and cuts power to regain grip. Both legally required in new cars.</div><div class="g-ex">💡 Pedal pulsing = ABS working normally. Keep pressing hard. Don't release.</div></div>
+    <div class="gc"><div class="gc-bar"></div><span class="g-icon">📈</span><div class="g-term">HP & Torque Curves</div><div class="g-def">Flat torque curve (EV, diesel) = strong pull at all RPMs. Peaky curve (sports car) = explosive at high RPM but weaker low down. Different personalities, not better or worse.</div><div class="g-ex">💡 EVs: max torque from 0 RPM — that's the source of that immediate violent shove.</div></div>
+    <div class="gc"><div class="gc-bar"></div><span class="g-icon">🔋</span><div class="g-term">Hybrid Fuel Tech</div><div class="g-def">Mild Hybrids assist the engine with a small battery. Full Hybrids drive short distances on electric only. PHEVs have larger batteries you charge externally — 20–50 miles electric before gas kicks in.</div><div class="g-ex">💡 Toyota Prius PHEV: up to 40 miles electric only. Seamless gas takeover after.</div></div>
+  </div>
+  <div class="qblock" id="quiz3">
+    <div class="qhdr"><div style="font-size:1.4rem;">🧠</div><div><div class="qhdr-title">Phase 3 Quiz — Performance</div><div class="qhdr-sub">8 questions · Test what you just learned</div></div></div>
+    <div class="qqs">
+      <div class="qq"><div class="qq-text">1. What does a turbocharger use to create more engine power?</div><div class="q-opts"><button class="qopt" onclick="ans(this,6,false,'quiz3')">Extra fuel injection only</button><button class="qopt" onclick="ans(this,6,true,'quiz3')">Exhaust gases to spin a turbine and force in more air</button><button class="qopt" onclick="ans(this,6,false,'quiz3')">A larger engine block</button><button class="qopt" onclick="ans(this,6,false,'quiz3')">A second battery pack</button></div><div class="qfb" id="fb-6"></div></div>
+      <div class="qq"><div class="qq-text">2. Why do electric vehicles feel so instantly fast from a stop?</div><div class="q-opts"><button class="qopt" onclick="ans(this,7,false,'quiz3')">They weigh less than gas cars</button><button class="qopt" onclick="ans(this,7,false,'quiz3')">They have better aerodynamics</button><button class="qopt" onclick="ans(this,7,true,'quiz3')">Electric motors produce 100% torque from 0 RPM</button><button class="qopt" onclick="ans(this,7,false,'quiz3')">They use launch control by default</button></div><div class="qfb" id="fb-7"></div></div>
+      <div class="qq"><div class="qq-text">3. "0–60 in 2.9 seconds" means...</div><div class="q-opts"><button class="qopt" onclick="ans(this,8,false,'quiz3')">The car's top speed is 60 mph</button><button class="qopt" onclick="ans(this,8,true,'quiz3')">From standstill to 60 mph takes 2.9 seconds</button><button class="qopt" onclick="ans(this,8,false,'quiz3')">The car uses 2.9L of fuel to reach 60 mph</button><button class="qopt" onclick="ans(this,8,false,'quiz3')">Engine revs to 60% capacity in 2.9s</button></div><div class="qfb" id="fb-8"></div></div>
+      <div class="qq"><div class="qq-text">4. What does DOHC stand for?</div><div class="q-opts"><button class="qopt" onclick="ans(this,300,false,'quiz3')">Double Overhead Cylinder Head</button><button class="qopt" onclick="ans(this,300,true,'quiz3')">Dual Overhead Camshaft</button><button class="qopt" onclick="ans(this,300,false,'quiz3')">Direct Output Horsepower Control</button><button class="qopt" onclick="ans(this,300,false,'quiz3')">Dynamic Overhead Combustion Heat</button></div><div class="qfb" id="fb-300"></div></div>
+      <div class="qq"><div class="qq-text">5. What does a "flat" torque curve mean for how a car feels to drive?</div><div class="q-opts"><button class="qopt" onclick="ans(this,301,false,'quiz3')">It only pulls hard at very high revs</button><button class="qopt" onclick="ans(this,301,true,'quiz3')">Strong, consistent power available at all RPMs — effortless</button><button class="qopt" onclick="ans(this,301,false,'quiz3')">The engine makes no noise</button><button class="qopt" onclick="ans(this,301,false,'quiz3')">It accelerates and decelerates equally fast</button></div><div class="qfb" id="fb-301"></div></div>
+      <div class="qq"><div class="qq-text">6. Traction Control (TC) works by...</div><div class="q-opts"><button class="qopt" onclick="ans(this,302,false,'quiz3')">Locking all four wheels during hard braking</button><button class="qopt" onclick="ans(this,302,false,'quiz3')">Adding extra grip using magnetic force</button><button class="qopt" onclick="ans(this,302,true,'quiz3')">Detecting wheel spin and cutting power to regain grip</button><button class="qopt" onclick="ans(this,302,false,'quiz3')">Adjusting the suspension in real-time</button></div><div class="qfb" id="fb-302"></div></div>
+      <div class="qq"><div class="qq-text">7. A PHEV (Plug-in Hybrid) differs from a regular hybrid because...</div><div class="q-opts"><button class="qopt" onclick="ans(this,303,false,'quiz3')">It runs on diesel only</button><button class="qopt" onclick="ans(this,303,true,'quiz3')">It has a larger battery you can charge externally for longer EV range</button><button class="qopt" onclick="ans(this,303,false,'quiz3')">It charges itself wirelessly while parked</button><button class="qopt" onclick="ans(this,303,false,'quiz3')">It has no combustion engine at all</button></div><div class="qfb" id="fb-303"></div></div>
+      <div class="qq"><div class="qq-text">8. Which car famously used launch control to achieve a 0–60 time under 2 seconds?</div><div class="q-opts"><button class="qopt" onclick="ans(this,304,false,'quiz3')">BMW M5</button><button class="qopt" onclick="ans(this,304,false,'quiz3')">Porsche 911 GT3</button><button class="qopt" onclick="ans(this,304,true,'quiz3')">Tesla Model S Plaid</button><button class="qopt" onclick="ans(this,304,false,'quiz3')">Ford Mustang GT500</button></div><div class="qfb" id="fb-304"></div></div>
+    </div>
+    <div class="qfooter"><div class="qscore">Score: <span id="score-quiz3">0</span> / 8</div><button class="btn btn-ghost btn-sm" onclick="resetQ('quiz3')">↺ Reset</button></div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- PHASE 4 -->
+<section id="p4">
+  <div class="sec-eye">Phase 04 — Brands & Market Intelligence</div>
+  <h2>Know<br>the Industry</h2>
+  <p class="sec-intro">Car brands exist in tiers, groups, and ecosystems. Understanding these explains pricing, quality, and what you're really paying for.</p>
+  <div class="subhead">🏢 Who Owns What</div>
+  <div class="grid-auto" style="margin-bottom:3rem;">
+    <div class="gc"><div class="gc-bar"></div><span class="g-icon">🇩🇪</span><div class="g-term">Volkswagen Group</div><div class="g-def">VW, Audi, Porsche, Lamborghini, Bentley, Škoda, SEAT/CUPRA. Shares platforms across brands to cut costs while keeping distinct identities.</div><div class="g-ex">💡 Lamborghini Urus shares its platform with the Audi Q8 and Bentley Bentayga.</div></div>
+    <div class="gc"><div class="gc-bar"></div><span class="g-icon">🇯🇵</span><div class="g-term">Toyota Group</div><div class="g-def">Toyota, Lexus (luxury arm), Daihatsu. Toyota = global reliability benchmark. Lexus = same exceptional build quality with a premium interior and badge.</div><div class="g-ex">💡 BMW Z4 and Toyota Supra share the same platform — co-developed together.</div></div>
+    <div class="gc"><div class="gc-bar"></div><span class="g-icon">🇺🇸</span><div class="g-term">Stellantis</div><div class="g-def">Formed 2021 from Fiat Chrysler + PSA Group. Now includes Jeep, Ram, Dodge, Fiat, Peugeot, Citroën, Alfa Romeo, Maserati. Wild mix from tough off-roaders to Italian exotics.</div><div class="g-ex">💡 Jeep Wrangler and Alfa Romeo Giulia — same parent company now.</div></div>
+    <div class="gc"><div class="gc-bar"></div><span class="g-icon">🔧</span><div class="g-term">Shared Engines & Platforms</div><div class="g-def">Brands share engineering far more than you'd think. Strips badge snobbery away — you're often buying the same platform in a different suit. Real knowledge beats marketing every time.</div><div class="g-ex">💡 Research actual engineering before assuming your badge is unique.</div></div>
+  </div>
+  <div class="subhead">🏷️ Major Brands — Luxury vs Mainstream</div>
+  <div class="brands-grid">
+    <div class="bcard"><div class="bname">Toyota</div><div class="borigin">🇯🇵 Japan — Mass Market</div><div class="bdesc">The global reliability benchmark. Camry & Corolla are two of the best-selling cars in history. Boring reputation, extraordinary ownership track record.</div><div class="btier">Best for: Reliability & long-term value</div></div>
+    <div class="bcard"><div class="bname">BMW</div><div class="borigin">🇩🇪 Germany — Luxury / Performance</div><div class="bdesc">"The Ultimate Driving Machine." Premium pricing for genuine driving dynamics and prestige. More expensive to maintain but highly rewarding to drive well.</div><div class="btier">Best for: Driver engagement & prestige</div></div>
+    <div class="bcard"><div class="bname">Mercedes</div><div class="borigin">🇩🇪 Germany — Luxury</div><div class="bdesc">The original luxury car brand. Focuses on comfort, refinement and prestige. The S-Class sets the global luxury sedan benchmark. AMG division handles serious performance.</div><div class="btier">Best for: Comfort, refinement & status</div></div>
+    <div class="bcard"><div class="bname">Tesla</div><div class="borigin">🇺🇸 USA — EV Pioneer</div><div class="bdesc">Rewrote the EV playbook. Over-the-air updates, blistering acceleration, Autopilot. A tech company that makes cars. Love or hate them — they changed everything.</div><div class="btier">Best for: Technology & EV performance</div></div>
+    <div class="bcard"><div class="bname">Ferrari</div><div class="borigin">🇮🇹 Italy — Exotic</div><div class="bdesc">Hand-built in Maranello. From $250,000+. Actual waiting lists. Every car is motorsport heritage made road-legal. The pinnacle of car culture.</div><div class="btier">Best for: Motorsport heritage & aspiration</div></div>
+    <div class="bcard"><div class="bname">Hyundai</div><div class="borigin">🇰🇷 South Korea — Mass Market</div><div class="bdesc">Most improved brand of the decade. Extraordinary value, serious EVs (IONIQ 5/6), proper performance cars via the N division. A genuine transformation.</div><div class="btier">Best for: Value & modern technology</div></div>
+    <div class="bcard"><div class="bname">Porsche</div><div class="borigin">🇩🇪 Germany — Luxury / Sports</div><div class="bdesc">Proves sports cars can be comfortable daily drivers. The 911 is an icon. Best resale value in premium segment. The Taycan showed EVs can genuinely be thrilling.</div><div class="btier">Best for: Everyday sports car ownership</div></div>
+    <div class="bcard"><div class="bname">Ford</div><div class="borigin">🇺🇸 USA — Mass Market</div><div class="bdesc">Iconic American brand. Makes the F-150 — best-selling vehicle in America 40+ consecutive years. The Mustang is a cultural icon. Broad lineup from budget to performance.</div><div class="btier">Best for: Trucks & American muscle</div></div>
+  </div>
+  <div class="qblock" id="quiz4">
+    <div class="qhdr"><div style="font-size:1.4rem;">🧠</div><div><div class="qhdr-title">Phase 4 Quiz — Brands & Market</div><div class="qhdr-sub">8 questions · Test what you just learned</div></div></div>
+    <div class="qqs">
+      <div class="qq"><div class="qq-text">1. Which group owns Lamborghini, Audi AND Porsche?</div><div class="q-opts"><button class="qopt" onclick="ans(this,9,false,'quiz4')">Stellantis</button><button class="qopt" onclick="ans(this,9,true,'quiz4')">Volkswagen Group</button><button class="qopt" onclick="ans(this,9,false,'quiz4')">Toyota Group</button><button class="qopt" onclick="ans(this,9,false,'quiz4')">Renault Group</button></div><div class="qfb" id="fb-9"></div></div>
+      <div class="qq"><div class="qq-text">2. What is Mercedes' official performance sub-brand?</div><div class="q-opts"><button class="qopt" onclick="ans(this,10,false,'quiz4')">Mercedes-Sport</button><button class="qopt" onclick="ans(this,10,true,'quiz4')">AMG</button><button class="qopt" onclick="ans(this,10,false,'quiz4')">Brabus</button><button class="qopt" onclick="ans(this,10,false,'quiz4')">M Division</button></div><div class="qfb" id="fb-10"></div></div>
+      <div class="qq"><div class="qq-text">3. The Toyota Supra and BMW Z4 share what exactly?</div><div class="q-opts"><button class="qopt" onclick="ans(this,11,false,'quiz4')">The same factory in Japan</button><button class="qopt" onclick="ans(this,11,false,'quiz4')">Identical exterior designs</button><button class="qopt" onclick="ans(this,11,true,'quiz4')">The same platform — co-developed together</button><button class="qopt" onclick="ans(this,11,false,'quiz4')">The same owner demographic</button></div><div class="qfb" id="fb-11"></div></div>
+      <div class="qq"><div class="qq-text">4. What is BMW's performance sub-brand called?</div><div class="q-opts"><button class="qopt" onclick="ans(this,400,false,'quiz4')">AMG</button><button class="qopt" onclick="ans(this,400,false,'quiz4')">RS</button><button class="qopt" onclick="ans(this,400,true,'quiz4')">M Division (BMW M)</button><button class="qopt" onclick="ans(this,400,false,'quiz4')">S-Line</button></div><div class="qfb" id="fb-400"></div></div>
+      <div class="qq"><div class="qq-text">5. Which car brand is known as "The Original Luxury Car Brand" and sets the S-Class benchmark?</div><div class="q-opts"><button class="qopt" onclick="ans(this,401,false,'quiz4')">BMW</button><button class="qopt" onclick="ans(this,401,false,'quiz4')">Rolls-Royce</button><button class="qopt" onclick="ans(this,401,true,'quiz4')">Mercedes-Benz</button><button class="qopt" onclick="ans(this,401,false,'quiz4')">Cadillac</button></div><div class="qfb" id="fb-401"></div></div>
+      <div class="qq"><div class="qq-text">6. Stellantis was formed in 2021 by the merger of which two groups?</div><div class="q-opts"><button class="qopt" onclick="ans(this,402,false,'quiz4')">VW Group and Toyota</button><button class="qopt" onclick="ans(this,402,true,'quiz4')">Fiat Chrysler (FCA) and PSA Group</button><button class="qopt" onclick="ans(this,402,false,'quiz4')">Ford and General Motors</button><button class="qopt" onclick="ans(this,402,false,'quiz4')">Renault and Nissan</button></div><div class="qfb" id="fb-402"></div></div>
+      <div class="qq"><div class="qq-text">7. Hyundai's performance division (for cars like the i30 N) is called...</div><div class="q-opts"><button class="qopt" onclick="ans(this,403,false,'quiz4')">Hyundai GT</button><button class="qopt" onclick="ans(this,403,false,'quiz4')">Hyundai Sport</button><button class="qopt" onclick="ans(this,403,true,'quiz4')">Hyundai N</button><button class="qopt" onclick="ans(this,403,false,'quiz4')">Hyundai RS</button></div><div class="qfb" id="fb-403"></div></div>
+      <div class="qq"><div class="qq-text">8. What does Lexus represent in relation to Toyota?</div><div class="q-opts"><button class="qopt" onclick="ans(this,404,false,'quiz4')">Toyota's budget entry-level brand</button><button class="qopt" onclick="ans(this,404,false,'quiz4')">A completely separate Japanese company</button><button class="qopt" onclick="ans(this,404,true,'quiz4')">Toyota's luxury arm — same quality, premium interior and badge</button><button class="qopt" onclick="ans(this,404,false,'quiz4')">Toyota's electric vehicle brand only</button></div><div class="qfb" id="fb-404"></div></div>
+    </div>
+    <div class="qfooter"><div class="qscore">Score: <span id="score-quiz4">0</span> / 8</div><button class="btn btn-ghost btn-sm" onclick="resetQ('quiz4')">↺ Reset</button></div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- PHASE 5 -->
+<section id="p5">
+  <div class="sec-eye">Phase 05 — Practical Application</div>
+  <h2>Think Like<br>a Nerd</h2>
+  <p class="sec-intro">Read specs like a pro. Compare cars intelligently. Know the real questions — and what the answers actually mean.</p>
+  <div class="subhead">📋 How to Read Car Specs — Like a Pro</div>
+  <div class="grid-auto" style="margin-bottom:3rem;">
+    <div class="gc"><div class="gc-bar"></div><span class="g-icon">🔢</span><div class="g-term">Engine: 2.0T, 4-cyl, DOHC</div><div class="g-def">Decoded: 2.0 litre, Turbocharged, 4 cylinders, Dual Overhead Cam. Compact but punchy — the sweet spot of modern engineering efficiency.</div><div class="g-ex">💡 Found in: Honda Civic Type R, VW Golf GTI, Hyundai Elantra N</div></div>
+    <div class="gc"><div class="gc-bar"></div><span class="g-icon">📊</span><div class="g-term">Power: 300 HP @ 6,500 RPM</div><div class="g-def">Peak power only at 6,500 RPM — needs to be revved high to get there. Compare: a diesel truck makes 400 HP at just 2,000 RPM. Entirely different character and feel.</div><div class="g-ex">💡 High RPM power = exciting to push. Low RPM power = effortless everyday torque.</div></div>
+    <div class="gc"><div class="gc-bar"></div><span class="g-icon">⚖️</span><div class="g-term">Curb Weight: 3,200 lbs</div><div class="g-def">How heavy the car is. Lighter = more responsive, better handling. Heavier = more comfort, crash protection, towing. Weight is the fundamental design trade-off in every car.</div><div class="g-ex">💡 Mazda MX-5: 2,340 lbs. Tesla Model X: 5,500 lbs. Both are fun — very differently.</div></div>
+    <div class="gc"><div class="gc-bar"></div><span class="g-icon">🔄</span><div class="g-term">Total Cost of Ownership</div><div class="g-def">Never compare just purchase price. Factor: annual fuel cost, insurance, maintenance, and depreciation (how much value it loses annually). A cheap car can cost more over 5 years.</div><div class="g-ex">💡 A reliable Toyota often costs less over 5 years than a cheaper but unreliable car.</div></div>
+  </div>
+  <div class="subhead">🙋 Real Questions, Honest Answers</div>
+  <div class="prac-stack" style="margin-bottom:0">
+    <div class="prac-row"><div class="p-icon">🛒</div><div><div class="p-q">How do I choose my first car?</div><div class="p-a">Start with total budget — not just monthly payment. Think about actual use: city → small hatchback, highway commuting → sedan, family needs → cargo space. Prioritize reliability and safety ratings over looks.</div><div class="p-tip">✅ Toyota Corolla, Honda Civic, Mazda3 — the consistent consensus first-car picks.</div></div></div>
+    <div class="prac-row"><div class="p-icon">🔋</div><div><div class="p-q">Should I go electric?</div><div class="p-a">Great if: home charging available, mostly local driving, want lower long-term costs. Not ideal if: apartment parking only, frequent long road trips, need lowest upfront cost. Hybrid = the best compromise for most on the fence.</div><div class="p-tip">✅ Calculate your actual annual fuel cost vs EV charging cost for your specific mileage.</div></div></div>
+    <div class="prac-row"><div class="p-icon">💰</div><div><div class="p-q">New vs Used?</div><div class="p-a">New cars depreciate ~20% the moment you drive off the lot. A 2–3 year old Certified Pre-Owned car gives you near-modern quality at significantly lower cost. New makes sense for: 0% financing deals, specific configurations, or full warranty peace of mind.</div><div class="p-tip">✅ Sweet spot: 2–3 year old CPO Toyota or Honda. Near-new quality, much lower price.</div></div></div>
+    <div class="prac-row"><div class="p-icon">📰</div><div><div class="p-q">How do I read car reviews properly?</div><div class="p-a">Pro reviewers test on tracks in ideal conditions. Focus on long-term ownership reports, reliability surveys, and owner forums. A thrilling press car can be genuinely irritating in daily traffic for 5 years.</div><div class="p-tip">✅ Search: "[car model] long-term review" + "[car model] common problems" for real insight.</div></div></div>
+  </div>
+  <div class="qblock" id="quiz5">
+    <div class="qhdr"><div style="font-size:1.4rem;">🧠</div><div><div class="qhdr-title">Phase 5 Quiz — Practical Application</div><div class="qhdr-sub">8 questions · Think like a car nerd</div></div></div>
+    <div class="qqs">
+      <div class="qq"><div class="qq-text">1. "300 HP @ 6,500 RPM" — what does this tell you?</div><div class="q-opts"><button class="qopt" onclick="ans(this,12,false,'quiz5')">It always makes 300 HP regardless of speed</button><button class="qopt" onclick="ans(this,12,true,'quiz5')">Peak power is only reached when revved to 6,500 RPM</button><button class="qopt" onclick="ans(this,12,false,'quiz5')">It has 300 HP at idle</button><button class="qopt" onclick="ans(this,12,false,'quiz5')">300 HP is the minimum power output</button></div><div class="qfb" id="fb-12"></div></div>
+      <div class="qq"><div class="qq-text">2. Why might a cheaper car actually cost MORE over 5 years?</div><div class="q-opts"><button class="qopt" onclick="ans(this,13,false,'quiz5')">Cheaper cars are always worse quality</button><button class="qopt" onclick="ans(this,13,true,'quiz5')">High fuel costs, maintenance bills, and fast depreciation add up</button><button class="qopt" onclick="ans(this,13,false,'quiz5')">Cheaper cars have worse safety ratings always</button><button class="qopt" onclick="ans(this,13,false,'quiz5')">Insurance is always higher on cheap cars</button></div><div class="qfb" id="fb-13"></div></div>
+      <div class="qq"><div class="qq-text">3. Biggest advantage of buying a 2–3 year old CPO car?</div><div class="q-opts"><button class="qopt" onclick="ans(this,14,false,'quiz5')">It's brand new with zero miles</button><button class="qopt" onclick="ans(this,14,false,'quiz5')">You can negotiate better warranty than new</button><button class="qopt" onclick="ans(this,14,true,'quiz5')">Someone else absorbed the biggest depreciation hit for you</button><button class="qopt" onclick="ans(this,14,false,'quiz5')">Older cars always have better safety tech</button></div><div class="qfb" id="fb-14"></div></div>
+      <div class="qq"><div class="qq-text">4. A heavier car (higher curb weight) is generally better for...</div><div class="q-opts"><button class="qopt" onclick="ans(this,500,false,'quiz5')">Fast cornering and fuel economy</button><button class="qopt" onclick="ans(this,500,true,'quiz5')">Comfort, crash protection, and towing</button><button class="qopt" onclick="ans(this,500,false,'quiz5')">Acceleration from a stop</button><button class="qopt" onclick="ans(this,500,false,'quiz5')">Fitting into tight parking spaces</button></div><div class="qfb" id="fb-500"></div></div>
+      <div class="qq"><div class="qq-text">5. When is buying a NEW car (vs used) most justified?</div><div class="q-opts"><button class="qopt" onclick="ans(this,501,false,'quiz5')">Always — new cars are always better value</button><button class="qopt" onclick="ans(this,501,false,'quiz5')">When you want the cheapest possible option</button><button class="qopt" onclick="ans(this,501,true,'quiz5')">When you qualify for 0% financing or need a specific configuration</button><button class="qopt" onclick="ans(this,501,false,'quiz5')">When you plan to sell it within 1 year</button></div><div class="qfb" id="fb-501"></div></div>
+      <div class="qq"><div class="qq-text">6. What should you search to get the most honest long-term car ownership info?</div><div class="q-opts"><button class="qopt" onclick="ans(this,502,false,'quiz5')">The car brand's official website</button><button class="qopt" onclick="ans(this,502,false,'quiz5')">The dealership's reviews page</button><button class="qopt" onclick="ans(this,502,true,'quiz5')">"[Car model] long-term review" and "[Car model] common problems"</button><button class="qopt" onclick="ans(this,502,false,'quiz5')">Car magazine first-drive reviews only</button></div><div class="qfb" id="fb-502"></div></div>
+      <div class="qq"><div class="qq-text">7. An electric car is probably NOT ideal for you if...</div><div class="q-opts"><button class="qopt" onclick="ans(this,503,false,'quiz5')">You do mostly city and suburb driving</button><button class="qopt" onclick="ans(this,503,false,'quiz5')">You want lower running costs over time</button><button class="qopt" onclick="ans(this,503,true,'quiz5')">You park in an apartment with no access to charging</button><button class="qopt" onclick="ans(this,503,false,'quiz5')">You care about environmental impact</button></div><div class="qfb" id="fb-503"></div></div>
+      <div class="qq"><div class="qq-text">8. "MPGe" on an electric car spec sheet stands for...</div><div class="q-opts"><button class="qopt" onclick="ans(this,504,false,'quiz5')">Miles Per Government Estimate</button><button class="qopt" onclick="ans(this,504,true,'quiz5')">Miles Per Gallon Equivalent — compares EV efficiency to a gas car</button><button class="qopt" onclick="ans(this,504,false,'quiz5')">Maximum Power Generated Electronically</button><button class="qopt" onclick="ans(this,504,false,'quiz5')">Motor Power in Gigawatt Equivalents</button></div><div class="qfb" id="fb-504"></div></div>
+    </div>
+    <div class="qfooter"><div class="qscore">Score: <span id="score-quiz5">0</span> / 8</div><button class="btn btn-ghost btn-sm" onclick="resetQ('quiz5')">↺ Reset</button></div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- PHASE 6 -->
+<section id="p6">
+  <div class="sec-eye">Phase 06 — Advanced Nerd Stuff</div>
+  <h2>The Deep<br>End.</h2>
+  <p class="sec-intro">Motorsport technology, exotic engines, ECU tuning, and the engineering future of EVs. No hand-holding here.</p>
+  <div class="adv-grid" style="margin-bottom:3rem;">
+    <div class="adv-card"><div class="adv-icon">🏁</div><div class="adv-title">Motorsport Tech</div><div class="adv-sub">Aero & Downforce</div><div class="adv-desc">Downforce pushes the car into the ground — opposite of aircraft lift. Front splitters, rear wings, underbody diffusers create it. More downforce = more grip but more drag. F1 cars generate so much they could theoretically drive upside-down at sufficient speed.</div></div>
+    <div class="adv-card"><div class="adv-icon">🔩</div><div class="adv-title">Exotic Engines</div><div class="adv-sub">W16, Flat-6, F1 Hybrids</div><div class="adv-desc">Bugatti W16 = two V8s merged, 16 cylinders, 1,578 HP. Porsche Flat-6 ("Boxer") = horizontal cylinders for lower center of gravity and that signature soundtrack. F1 units = 1.6L turbo V6 producing 1,000+ HP — physics pushed to absolute limits.</div></div>
+    <div class="adv-card"><div class="adv-icon">🔧</div><div class="adv-title">Tuning & Modding</div><div class="adv-sub">ECU, Turbo Kits, Coilovers</div><div class="adv-desc">ECU remapping rewrites software controlling fuel, timing, and boost — typically unlocking 10–30% more power safely. Turbo kits add forced induction to naturally aspirated engines. Coilovers give adjustable ride height and stiffness. Engineering as a hobby — a rabbit hole with no visible bottom.</div></div>
+    <div class="adv-card"><div class="adv-icon">⚡</div><div class="adv-title">EV Deep Dive</div><div class="adv-sub">Batteries, Torque Curves & Range</div><div class="adv-desc">Battery capacity in kWh — more = more range. NMC vs LFP chemistry affects charge cycle longevity and fast-charge behavior. Electric motors deliver 100% torque from 0 RPM — no gears needed. Regenerative braking recovers kinetic energy, extending range and reducing brake wear simultaneously.</div></div>
+  </div>
+  <div class="qblock" id="quiz6">
+    <div class="qhdr"><div style="font-size:1.4rem;">🧠</div><div><div class="qhdr-title">Phase 6 Quiz — Advanced</div><div class="qhdr-sub">8 questions · For real car nerds</div></div></div>
+    <div class="qqs">
+      <div class="qq"><div class="qq-text">1. What does "downforce" do to a car at high speed?</div><div class="q-opts"><button class="qopt" onclick="ans(this,15,false,'quiz6')">Makes it more aerodynamic and reduces drag</button><button class="qopt" onclick="ans(this,15,true,'quiz6')">Pushes it into the ground for more cornering grip</button><button class="qopt" onclick="ans(this,15,false,'quiz6')">Reduces the effective weight of the car</button><button class="qopt" onclick="ans(this,15,false,'quiz6')">Creates lift, helping at top speed</button></div><div class="qfb" id="fb-15"></div></div>
+      <div class="qq"><div class="qq-text">2. What does ECU remapping (tuning) primarily change?</div><div class="q-opts"><button class="qopt" onclick="ans(this,16,false,'quiz6')">The physical engine components</button><button class="qopt" onclick="ans(this,16,false,'quiz6')">The suspension stiffness electronically</button><button class="qopt" onclick="ans(this,16,true,'quiz6')">The software controlling fuel, ignition timing, and boost</button><button class="qopt" onclick="ans(this,16,false,'quiz6')">The gearbox shift points only</button></div><div class="qfb" id="fb-16"></div></div>
+      <div class="qq"><div class="qq-text">3. The Bugatti W16 engine — how many cylinders does it have?</div><div class="q-opts"><button class="qopt" onclick="ans(this,17,false,'quiz6')">12</button><button class="qopt" onclick="ans(this,17,false,'quiz6')">14</button><button class="qopt" onclick="ans(this,17,true,'quiz6')">16</button><button class="qopt" onclick="ans(this,17,false,'quiz6')">18</button></div><div class="qfb" id="fb-17"></div></div>
+      <div class="qq"><div class="qq-text">4. What does "regenerative braking" do in an EV?</div><div class="q-opts"><button class="qopt" onclick="ans(this,600,false,'quiz6')">Uses bigger brake pads for more stopping power</button><button class="qopt" onclick="ans(this,600,true,'quiz6')">Converts kinetic energy back into battery power while slowing down</button><button class="qopt" onclick="ans(this,600,false,'quiz6')">Automatically applies brakes at high speed</button><button class="qopt" onclick="ans(this,600,false,'quiz6')">Regenerates brake fluid after heavy use</button></div><div class="qfb" id="fb-600"></div></div>
+      <div class="qq"><div class="qq-text">5. Coilovers (an aftermarket suspension upgrade) allow you to adjust...</div><div class="q-opts"><button class="qopt" onclick="ans(this,601,false,'quiz6')">Engine power output</button><button class="qopt" onclick="ans(this,601,false,'quiz6')">Tire width and compound</button><button class="qopt" onclick="ans(this,601,true,'quiz6')">Ride height and suspension stiffness</button><button class="qopt" onclick="ans(this,601,false,'quiz6')">Gear ratios in the transmission</button></div><div class="qfb" id="fb-601"></div></div>
+      <div class="qq"><div class="qq-text">6. What is the key engineering advantage of the Porsche Boxer (Flat-6) engine layout?</div><div class="q-opts"><button class="qopt" onclick="ans(this,602,false,'quiz6')">It produces the most horsepower per cylinder</button><button class="qopt" onclick="ans(this,602,false,'quiz6')">It is the most fuel-efficient engine layout</button><button class="qopt" onclick="ans(this,602,true,'quiz6')">Lower center of gravity due to horizontally opposed cylinders</button><button class="qopt" onclick="ans(this,602,false,'quiz6')">It runs on regular fuel without a turbo</button></div><div class="qfb" id="fb-602"></div></div>
+      <div class="qq"><div class="qq-text">7. F1 cars in the hybrid era use a 1.6L V6 turbo. How much power do these units produce?</div><div class="q-opts"><button class="qopt" onclick="ans(this,603,false,'quiz6')">Around 400 HP</button><button class="qopt" onclick="ans(this,603,false,'quiz6')">Around 600 HP</button><button class="qopt" onclick="ans(this,603,false,'quiz6')">Around 800 HP</button><button class="qopt" onclick="ans(this,603,true,'quiz6')">Over 1,000 HP</button></div><div class="qfb" id="fb-603"></div></div>
+      <div class="qq"><div class="qq-text">8. EV battery chemistry — what does "LFP" stand for and what's its key advantage?</div><div class="q-opts"><button class="qopt" onclick="ans(this,604,false,'quiz6')">Lithium Fast Power — charges faster than all other types</button><button class="qopt" onclick="ans(this,604,true,'quiz6')">Lithium Iron Phosphate — longer cycle life and can charge to 100% daily</button><button class="qopt" onclick="ans(this,604,false,'quiz6')">Low Frequency Power — used in budget EVs only</button><button class="qopt" onclick="ans(this,604,false,'quiz6')">Liquid Fuel Polymer — a hybrid of gas and electric</button></div><div class="qfb" id="fb-604"></div></div>
+    </div>
+    <div class="qfooter"><div class="qscore">Score: <span id="score-quiz6">0</span> / 8</div><button class="btn btn-ghost btn-sm" onclick="resetQ('quiz6')">↺ Reset</button></div>
+  </div>
+  <div class="mindset-box">
+    <div style="font-size:2.5rem;margin-bottom:1rem;">🧠</div>
+    <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.9rem;margin-bottom:1rem;">The Final Mindset</div>
+    <div style="color:var(--muted);font-size:.92rem;line-height:1.9;max-width:560px;margin:0 auto 1.5rem;">Think → Analyze → Apply.<br><strong style="color:var(--white)">No more blind love for badges. No more being impressed by numbers you don't understand.</strong> Real knowledge means you walk into any car conversation — dealership, forum, track day — knowing exactly what's in front of you.</div>
+    <div style="font-size:.7rem;color:var(--green);text-transform:uppercase;letter-spacing:.18em;font-family:'Syne',sans-serif;font-weight:700;">Real Knowledge = Real Power</div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- COMPARE TOOL -->
+<section id="compare">
+  <div class="sec-eye">Car Comparison Tool</div>
+  <h2>Compare<br>Any Two Cars</h2>
+  <p class="sec-intro">Pick two cars and see how they stack up side by side — specs, strengths, and a plain-English verdict on each.</p>
+  <div class="ctool">
+    <div class="cthdr"><div style="font-size:1.4rem;">⚖️</div><div><div class="cthdr-title">Head-to-Head Comparison</div><div style="font-size:.74rem;color:var(--muted);">Select two cars to compare specs & get a verdict</div></div></div>
+    <div class="ct-sels">
+      <div class="ct-sel-wrap"><div class="ct-label">Car A</div>
+        <select class="ct-sel" id="carA" onchange="updateComp()">
+          <option value="">— Select a car —</option>
+          <option value="corolla">Toyota Corolla</option><option value="civic">Honda Civic</option>
+          <option value="golf">VW Golf GTI</option><option value="model3">Tesla Model 3</option>
+          <option value="mustang">Ford Mustang GT</option><option value="bmw3">BMW 3 Series</option>
+          <option value="mercedesC">Mercedes C-Class</option><option value="mazda3">Mazda3</option>
+          <option value="ioniq5">Hyundai IONIQ 5</option><option value="p911">Porsche 911</option>
+        </select>
+      </div>
+      <div class="ct-vs">VS</div>
+      <div class="ct-sel-wrap"><div class="ct-label">Car B</div>
+        <select class="ct-sel" id="carB" onchange="updateComp()">
+          <option value="">— Select a car —</option>
+          <option value="corolla">Toyota Corolla</option><option value="civic">Honda Civic</option>
+          <option value="golf">VW Golf GTI</option><option value="model3">Tesla Model 3</option>
+          <option value="mustang">Ford Mustang GT</option><option value="bmw3">BMW 3 Series</option>
+          <option value="mercedesC">Mercedes C-Class</option><option value="mazda3">Mazda3</option>
+          <option value="ioniq5">Hyundai IONIQ 5</option><option value="p911">Porsche 911</option>
+        </select>
+      </div>
+    </div>
+    <div class="ct-results" id="compResults"><div class="ct-empty">👆 Select two cars above to start comparing</div></div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <div class="footer-logo">Car<span>DNA</span></div>
+    <div style="font-size:.72rem;color:var(--muted);margin-top:.3rem;">From Beginner to Expert</div>
+  </div>
+  <div style="display:flex;align-items:center;gap:.5rem;background:var(--card);border:1px solid var(--border2);border-radius:20px;padding:.4rem 1rem;font-size:.78rem;font-family:'Inter',sans-serif;">
+    <svg width="10" height="12" viewBox="0 0 10 12" fill="none"><rect x="1" y="5" width="8" height="6" rx="1.5" stroke="#22c55e" stroke-width="1.2"/><path d="M3 5V3.5a2 2 0 0 1 4 0V5" stroke="#22c55e" stroke-width="1.2" stroke-linecap="round"/></svg>
+    <span style="color:var(--green);font-weight:500;">https://</span><span style="color:var(--white);">cardna.com</span>
+  </div>
+  <div class="fnote">© 2025 CarDNA · No gatekeeping. No jargon.</div>
+</footer>
+
+<script>
+const cars={corolla:{name:"Toyota Corolla",sub:"Reliable Daily Driver",hp:169,torque:"151 lb-ft",engine:"2.0L 4-cyl",trans:"CVT Auto",drive:"FWD",mpg:"31 / 38",weight:"2,910 lbs",price:"$23,000",seats:5,type:"Sedan",rating:"5/5",best:"Reliability & economy",verdict:"The Corolla is the ultimate sensible choice — legendarily reliable, cheap to run, holds value well. The perfect first or daily car. Boring is underrated."},civic:{name:"Honda Civic",sub:"Sporty & Practical",hp:158,torque:"138 lb-ft",engine:"2.0L 4-cyl",trans:"CVT Auto",drive:"FWD",mpg:"31 / 38",weight:"2,877 lbs",price:"$24,000",seats:5,type:"Sedan/Hatchback",rating:"5/5",best:"Fun daily driving",verdict:"The Civic feels sportier than the Corolla while being equally reliable. The hatchback version adds useful cargo flexibility. A driver's car that's still practical."},golf:{name:"VW Golf GTI",sub:"Hot Hatch Icon",hp:241,torque:"273 lb-ft",engine:"2.0T 4-cyl",trans:"7-spd DCT",drive:"FWD",mpg:"24 / 32",weight:"3,153 lbs",price:"$31,000",seats:5,type:"Hot Hatchback",rating:"4/5",best:"Performance + practicality",verdict:"The GTI proves you don't need RWD to have serious driving fun. 241 HP through a practical hatchback body is genuinely thrilling every single day."},model3:{name:"Tesla Model 3",sub:"The EV Benchmark",hp:283,torque:"307 lb-ft",engine:"Electric Motor",trans:"Single-speed",drive:"RWD / AWD",mpg:"132 MPGe",weight:"3,862 lbs",price:"$40,000",seats:5,type:"Sedan (EV)",rating:"5/5",best:"Tech & running costs",verdict:"The Model 3 is the benchmark EV. Incredible tech, over-the-air updates, and running costs far below gas cars. The Standard Range is now very competitive on price."},mustang:{name:"Ford Mustang GT",sub:"American Muscle Icon",hp:450,torque:"410 lb-ft",engine:"5.0L V8",trans:"6-spd Manual / Auto",drive:"RWD",mpg:"15 / 24",weight:"3,705 lbs",price:"$32,000",seats:4,type:"Muscle Car / Coupe",rating:"4/5",best:"V8 thrills & heritage",verdict:"If you want that V8 sound, RWD excitement, and cultural icon status — nothing beats the Mustang at this price. Just budget properly for the fuel."},bmw3:{name:"BMW 3 Series",sub:"The Driver's Sedan",hp:255,torque:"295 lb-ft",engine:"2.0T 4-cyl",trans:"8-spd Auto",drive:"RWD / AWD",mpg:"26 / 36",weight:"3,583 lbs",price:"$44,000",seats:5,type:"Sports Sedan",rating:"4/5",best:"Driver engagement & prestige",verdict:"The 3 Series remains the benchmark sports sedan. More expensive to maintain than Japanese rivals but delivers genuine driving pleasure that's hard to match at this price."},mercedesC:{name:"Mercedes C-Class",sub:"Luxury & Refinement",hp:255,torque:"295 lb-ft",engine:"2.0T 4-cyl",trans:"9-spd Auto",drive:"RWD / AWD",mpg:"24 / 34",weight:"3,660 lbs",price:"$46,000",seats:5,type:"Luxury Sedan",rating:"4/5",best:"Comfort, interior quality & status",verdict:"The C-Class prioritizes interior luxury and refinement over driving excitement. The cabin is stunning — feels like a smaller S-Class. Choose it if comfort beats sportiness for you."},mazda3:{name:"Mazda3",sub:"The Underrated Gem",hp:191,torque:"186 lb-ft",engine:"2.5L 4-cyl",trans:"6-spd Auto",drive:"FWD / AWD",mpg:"27 / 36",weight:"3,080 lbs",price:"$24,000",seats:5,type:"Sedan/Hatchback",rating:"5/5",best:"Design, driving feel & value",verdict:"The most underrated car in its class. Premium feel without the premium badge price. Interior design and driving feel rival cars costing $10k more. A genuine hidden gem."},ioniq5:{name:"Hyundai IONIQ 5",sub:"EV Design Statement",hp:225,torque:"258 lb-ft",engine:"Electric Motor",trans:"Single-speed",drive:"RWD / AWD",mpg:"114 MPGe",weight:"4,497 lbs",price:"$42,000",seats:5,type:"Crossover (EV)",rating:"5/5",best:"EV design & ultra-fast charging",verdict:"The IONIQ 5 has 800V ultra-fast charging (10-80% in 18 mins), a futuristic retro design, and exceptional real-world practicality. Possibly the best all-round EV right now."},p911:{name:"Porsche 911",sub:"The Daily Supercar",hp:379,torque:"331 lb-ft",engine:"3.0L Flat-6 Turbo",trans:"8-spd PDK",drive:"RWD / AWD",mpg:"18 / 25",weight:"3,354 lbs",price:"$115,000",seats:4,type:"Sports Car",rating:"5/5",best:"Everyday supercar ownership",verdict:"The 911 is proof you can have a supercar as your daily driver. Thrilling, practical enough, and with the best resale value in the premium segment. An engineering icon."}};
+
+const fbs={0:{g:"✅ Correct! Torque is the twisting force that gets the car moving — you feel it as the shove from a standing stop.",b:"❌ Not quite. Torque is about acceleration from standstill, not top speed or braking."},1:{g:"✅ Correct! AWD automatically sends power to all four wheels for maximum grip in any condition.",b:"❌ Not quite. AWD is the system that automatically powers all four wheels."},2:{g:"✅ Correct! 'L' stands for litres — the total volume of all cylinders combined in the engine.",b:"❌ Not quite. It refers to the total displacement (volume) of the cylinders, measured in litres."},3:{g:"✅ Correct! ABS prevents wheel lock-up so you keep steering control during heavy braking.",b:"❌ Not quite. ABS keeps wheels from locking so you can still steer during panic stops."},4:{g:"✅ Correct! CVT is the smoothest and most fuel-efficient gearbox for daily stop-start driving.",b:"❌ Not quite. CVT (Continuously Variable Transmission) is smoothest and most fuel-efficient for city use."},5:{g:"✅ Correct! Stiffer suspension = bumpier ride but sharper, more precise handling.",b:"❌ Not quite. Stiffer suspension trades comfort for better handling precision."},6:{g:"✅ Correct! A turbo uses exhaust gases to spin a turbine, forcing more compressed air into the engine.",b:"❌ Not quite. Turbos use exhaust gases — otherwise wasted energy — to compress more air into the engine."},7:{g:"✅ Correct! Electric motors produce 100% of their torque from 0 RPM — no revving required at all.",b:"❌ Not quite. EVs feel instant because electric motors have maximum torque available from zero RPM."},8:{g:"✅ Correct! 0–60 measures the time to accelerate from a complete standstill to 60 mph.",b:"❌ Not quite. 0-60 measures how long it takes to reach 60 mph from a standing start."},9:{g:"✅ Correct! Volkswagen Group owns Audi, Porsche, Lamborghini, Bentley, and many more.",b:"❌ Not quite. VW Group (Volkswagen Group) is the parent of Lamborghini, Audi, and Porsche."},10:{g:"✅ Correct! AMG is Mercedes-Benz's official in-house performance sub-brand.",b:"❌ Not quite. AMG is the official Mercedes-Benz performance division — they develop the hot versions."},11:{g:"✅ Correct! Toyota and BMW co-developed the shared platform — resulting in both the Supra and Z4.",b:"❌ Not quite. Toyota and BMW jointly developed the platform underpinning both the Supra and Z4."},12:{g:"✅ Correct! Peak HP is only reached at that specific RPM — you must rev it there to get that power.",b:"❌ Not quite. The HP figure is only achieved at that specific RPM — not at all times during driving."},13:{g:"✅ Correct! Total cost of ownership includes fuel, maintenance, insurance, and depreciation — not just price.",b:"❌ Not quite. High running costs and fast depreciation can make a 'cheap' car expensive over 5 years."},14:{g:"✅ Correct! The first owner takes the biggest depreciation hit. You buy at year 2-3 and get most of the car for much less.",b:"❌ Not quite. The key advantage is that the previous owner absorbed the steepest depreciation for you."},15:{g:"✅ Correct! Downforce pushes the car into the road surface, increasing tire grip for faster cornering.",b:"❌ Not quite. Downforce pushes the car into the road — opposite of aircraft lift — increasing grip."},16:{g:"✅ Correct! ECU remapping changes the software — fuel maps, ignition timing, boost pressure limits.",b:"❌ Not quite. ECU remapping changes the software parameters that control how the engine runs."},17:{g:"✅ Correct! The W16 has 16 cylinders in a W formation — basically two V8 engines merged.",b:"❌ Not quite. The Bugatti's W16 has 16 cylinders — two V8s effectively merged into one unit."},
+100:{g:"✅ Correct! Horsepower determines top-end speed and how well the car sustains power at high RPM.",b:"❌ Not quite. Horsepower is about top-end sustained power and maximum speed, not weight or economy."},
+101:{g:"✅ Correct! The Boxer (flat/horizontally opposed) layout sits cylinders low and flat, lowering the center of gravity.",b:"❌ Not quite. Subaru uses the Boxer (flat) layout — cylinders lying horizontal on each side."},
+102:{g:"✅ Correct! A hybrid combines a traditional combustion engine with an electric motor and battery.",b:"❌ Not quite. A hybrid pairs a combustion engine with an electric motor/battery for improved efficiency."},
+103:{g:"✅ Correct! RWD sends power exclusively to the rear two wheels.",b:"❌ Not quite. RWD = Rear-Wheel Drive — power goes to the back wheels only."},
+104:{g:"✅ Correct! A longer wheelbase means more passenger/cargo space inside and a smoother, more stable ride.",b:"❌ Not quite. Longer wheelbase = more interior space and smoother ride. Shorter = sharper handling."},
+200:{g:"✅ Correct! The standard 4-stroke engine has four strokes: Intake, Compression, Combustion, Exhaust.",b:"❌ Not quite. The standard car engine has 4 strokes — Intake, Compression, Combustion (Power), Exhaust."},
+201:{g:"✅ Correct! The cooling system keeps the engine from overheating by circulating coolant and releasing heat through the radiator.",b:"❌ Not quite. The cooling system's primary job is preventing the engine from overheating — which would be catastrophic."},
+202:{g:"✅ Correct! Wider tires offer more grip but come at the cost of higher fuel consumption and road noise.",b:"❌ Not quite. Wider tires use more fuel and create more road noise — there's a real tradeoff."},
+203:{g:"✅ Correct! DCT (Dual-Clutch) is famous for incredibly fast gear changes and high fuel efficiency.",b:"❌ Not quite. DCT is known for its lightning-fast shifts — it uses two clutches to pre-select the next gear."},
+204:{g:"✅ Correct! The third stroke is Combustion (also called the Power stroke) — where the spark plug fires.",b:"❌ Not quite. The order is: 1. Intake → 2. Compression → 3. Combustion/Power → 4. Exhaust."},
+300:{g:"✅ Correct! DOHC = Dual Overhead Camshaft — two cams per cylinder bank for precise valve control.",b:"❌ Not quite. DOHC stands for Dual Overhead Camshaft — two camshafts controlling the valves."},
+301:{g:"✅ Correct! A flat torque curve means strong, consistent power across all RPMs — it always feels effortless.",b:"❌ Not quite. A flat torque curve = power available at all RPMs, not just at peak revs. Effortless and accessible."},
+302:{g:"✅ Correct! Traction Control detects spinning wheels under acceleration and cuts power to restore grip.",b:"❌ Not quite. TC detects wheel spin on acceleration and reduces engine power to regain traction."},
+303:{g:"✅ Correct! PHEVs have larger externally-chargeable batteries giving 20-50 miles of pure electric range before gas kicks in.",b:"❌ Not quite. A PHEV has a larger battery you plug in externally, giving real EV-only range before needing the engine."},
+304:{g:"✅ Correct! The Tesla Model S Plaid famously achieved a sub-2-second 0-60 using its electric launch control system.",b:"❌ Not quite. The Tesla Model S Plaid holds the production car record with a sub-2-second 0-60 mph time."},
+400:{g:"✅ Correct! BMW's performance sub-brand is called M Division (or simply 'BMW M'). Think M3, M5, M8.",b:"❌ Not quite. BMW's performance sub-brand is M Division — responsible for cars like the M3, M4, and M5."},
+401:{g:"✅ Correct! Mercedes-Benz is considered the original luxury car brand, and the S-Class sets the global luxury benchmark.",b:"❌ Not quite. Mercedes-Benz is widely regarded as the original luxury car brand with the S-Class as the ultimate benchmark."},
+402:{g:"✅ Correct! Stellantis was formed by the 2021 merger of Fiat Chrysler Automobiles (FCA) and the PSA Group.",b:"❌ Not quite. Stellantis was created by merging Fiat Chrysler (FCA) and PSA Group (makers of Peugeot, Citroën) in 2021."},
+403:{g:"✅ Correct! Hyundai's performance division is called 'N' — responsible for the i30 N, Elantra N, and IONIQ 5 N.",b:"❌ Not quite. Hyundai's performance sub-brand is simply called 'N' — named after the Nürburgring racetrack."},
+404:{g:"✅ Correct! Lexus is Toyota's luxury brand — same exceptional build quality with a premium cabin and badge.",b:"❌ Not quite. Lexus is Toyota's luxury arm — same renowned quality underneath with a more premium presentation."},
+500:{g:"✅ Correct! Heavier cars provide more comfort, better crash energy absorption, and greater towing capability.",b:"❌ Not quite. Heavier cars trade agility and economy for comfort, protection, and towing strength."},
+501:{g:"✅ Correct! New cars make most sense when you can access 0% financing deals or need a very specific build.",b:"❌ Not quite. New cars justify their price premium mainly through 0% financing deals or exact specification needs."},
+502:{g:"✅ Correct! Long-term reviews and owner problem reports give you real-world data that short first-drive reviews miss.",b:"❌ Not quite. The most honest insight comes from long-term reviews and owner forums — not official or brand sources."},
+503:{g:"✅ Correct! Without home charging access, an EV becomes very inconvenient — relying entirely on public chargers.",b:"❌ Not quite. Lack of home charging is the single biggest practical barrier to EV ownership for most people."},
+504:{g:"✅ Correct! MPGe (Miles Per Gallon Equivalent) lets you compare EV efficiency against traditional gas car MPG ratings.",b:"❌ Not quite. MPGe = Miles Per Gallon Equivalent — a standardized way to compare EV efficiency to gas car efficiency."},
+600:{g:"✅ Correct! Regenerative braking uses the electric motor as a generator to convert braking energy back into battery charge.",b:"❌ Not quite. Regenerative braking converts kinetic energy into electricity, feeding it back into the battery while slowing down."},
+601:{g:"✅ Correct! Coilovers replace the factory suspension and let you dial in your preferred ride height and stiffness.",b:"❌ Not quite. Coilovers are adjustable suspension units — you set ride height and stiffness to your preference."},
+602:{g:"✅ Correct! The Boxer's horizontal layout keeps the engine mass low and flat, giving the car a lower center of gravity.",b:"❌ Not quite. The Boxer layout's main engineering advantage is a lower center of gravity from its horizontal cylinder arrangement."},
+603:{g:"✅ Correct! Modern F1 power units produce over 1,000 HP from just a 1.6L V6 turbo hybrid — an engineering miracle.",b:"❌ Not quite. F1 hybrid power units exceed 1,000 HP from a 1.6L turbocharged V6 combined with electric motor generators."},
+604:{g:"✅ Correct! LFP (Lithium Iron Phosphate) batteries last longer across charge cycles and can safely charge to 100% daily without degradation.",b:"❌ Not quite. LFP = Lithium Iron Phosphate — known for longer cycle life and the ability to charge to 100% daily."}
+};
+
+const answered={},scores={quiz1:0,quiz2:0,quiz3:0,quiz4:0,quiz5:0,quiz6:0};
+
+function ans(btn,idx,correct,qid){
+  const key=qid+'-'+idx;
+  if(answered[key])return;
+  answered[key]=true;
+  const qq=btn.closest('.qq');
+  const opts=qq.querySelectorAll('.qopt');
+  const fb=qq.querySelector('.qfb');
+  opts.forEach(o=>{if(o!==btn)o.classList.add('disabled');});
+  if(correct){
+    btn.classList.add('correct');
+    scores[qid]++;
+    fb.textContent=fbs[idx].g;
+    fb.className='qfb show good';
+  }else{
+    btn.classList.add('wrong');
+    fb.textContent=fbs[idx].b;
+    fb.className='qfb show bad';
+  }
+  document.getElementById('score-'+qid).textContent=scores[qid];
+}
+
+function resetQ(qid){
+  const el=document.getElementById(qid);
+  el.querySelectorAll('.qopt').forEach(o=>o.classList.remove('correct','wrong','disabled'));
+  el.querySelectorAll('.qfb').forEach(f=>{f.className='qfb';f.textContent='';});
+  Object.keys(answered).forEach(k=>{if(k.startsWith(qid))delete answered[k];});
+  scores[qid]=0;
+  document.getElementById('score-'+qid).textContent='0';
+}
+
+function updateComp(){
+  const ak=document.getElementById('carA').value;
+  const bk=document.getElementById('carB').value;
+  const res=document.getElementById('compResults');
+  if(!ak||!bk){res.innerHTML='<div class="ct-empty">👆 Select two cars above to start comparing</div>';return;}
+  if(ak===bk){res.innerHTML='<div class="ct-empty">🤔 Pick two different cars to compare!</div>';return;}
+  const a=cars[ak],b=cars[bk];
+  function row(label,va,vb,higherBetter=true){
+    const na=parseFloat(String(va).replace(/[^0-9.]/g,'')),nb=parseFloat(String(vb).replace(/[^0-9.]/g,''));
+    let ca='',cb='';
+    if(!isNaN(na)&&!isNaN(nb)&&na!==nb){
+      if(higherBetter){ca=na>nb?'better':'';cb=nb>na?'better':'';}
+      else{ca=na<nb?'better':'';cb=nb<na?'better':'';}
+    }
+    return`<div class="ct-row"><span class="ct-key">${label}</span><div style="display:flex;gap:2.5rem;"><span class="ct-val ${ca}">${va}</span><span class="ct-val ${cb}">${vb}</span></div></div>`;
+  }
+  res.innerHTML=`<div class="ct-grid">
+    <div class="ct-card"><div class="ct-name">${a.name}</div><div class="ct-sub">${a.sub}</div>
+    ${row('Horsepower',a.hp+' HP',b.hp+' HP')}${row('Torque',a.torque,b.torque)}${row('Engine',a.engine,b.engine)}${row('Transmission',a.trans,b.trans)}${row('Drivetrain',a.drive,b.drive)}${row('Fuel Economy',a.mpg,b.mpg)}${row('Weight',a.weight,b.weight,false)}${row('Starting Price',a.price,b.price,false)}${row('Seats',a.seats,b.seats)}${row('Body Type',a.type,b.type)}${row('Reliability',a.rating,b.rating)}
+    <div style="margin-top:1.2rem;padding:1rem;background:var(--gd);border-radius:3px;border:1px solid rgba(34,197,94,.15);"><div style="font-size:.66rem;color:var(--green);font-family:'Syne',sans-serif;font-weight:700;margin-bottom:.3rem;">BEST FOR</div><div style="font-size:.8rem;color:var(--white);">${a.best}</div></div>
+    </div>
+    <div class="ct-card"><div class="ct-name">${b.name}</div><div class="ct-sub">${b.sub}</div>
+    ${row('Horsepower',b.hp+' HP',a.hp+' HP')}${row('Torque',b.torque,a.torque)}${row('Engine',b.engine,a.engine)}${row('Transmission',b.trans,a.trans)}${row('Drivetrain',b.drive,a.drive)}${row('Fuel Economy',b.mpg,a.mpg)}${row('Weight',b.weight,a.weight,false)}${row('Starting Price',b.price,a.price,false)}${row('Seats',b.seats,a.seats)}${row('Body Type',b.type,a.type)}${row('Reliability',b.rating,a.rating)}
+    <div style="margin-top:1.2rem;padding:1rem;background:var(--gd);border-radius:3px;border:1px solid rgba(34,197,94,.15);"><div style="font-size:.66rem;color:var(--green);font-family:'Syne',sans-serif;font-weight:700;margin-bottom:.3rem;">BEST FOR</div><div style="font-size:.8rem;color:var(--white);">${b.best}</div></div>
+    </div>
+  </div>
+  <div class="ct-verdict"><strong>⚖️ The Verdict:</strong><br><strong>${a.name}:</strong> ${a.verdict}<br><br><strong>${b.name}:</strong> ${b.verdict}</div>`;
+}
+</script>
+</body>
+</html>
